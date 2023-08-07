@@ -1,0 +1,39 @@
+{
+  "name": "yourplugin",
+  "version": "1.0.0",
+  "description": "A starter project for creating a Wordpress plugin.",
+  "keywords": [
+    "wordpress",
+    "template",
+    "plugin"
+  ],
+  "type": "module",
+  "homepage": "https://www.deschutesdesigngroup.com",
+  "license": "MIT",
+  "author": {
+    "name": "Jon Erickson",
+    "email": "jon@deschutesdesigngroup.com",
+    "url": "https://www.deschutesdesigngroup.com"
+  },
+  "scripts": {
+    "dev": "bud development",
+    "build": "bud build"
+  },
+  "devDependencies": {
+    "@roots/bud": "^6.14.3",
+    "@roots/bud-eslint": "^6.14.3",
+    "@roots/bud-prettier": "^6.14.3",
+    "@roots/bud-tailwindcss": "^6.14.3",
+    "@roots/eslint-config": "^6.14.3",
+    "tailwindcss": "^3.3.3"
+  },
+  "files": [
+    "yourplugin.php",
+    "src",
+    "vendor",
+    "composer.json",
+    "composer.lock",
+    "package.json",
+    "yarn.lock"
+  ]
+}

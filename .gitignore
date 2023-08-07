@@ -1,0 +1,22 @@
+# IntelliJ Project Files
+.idea
+*.iml
+out
+gen
+_config.yml
+
+# Dependencies
+vendor
+node_modules
+wordpress
+
+# Builds
+*.zip
+
+# Other
+.env
+*.cache
+*.log
+
+# Laravel
+src/public
