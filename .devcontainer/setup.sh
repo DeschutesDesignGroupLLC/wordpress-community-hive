@@ -22,13 +22,13 @@ wp plugin delete akismet
 wp plugin install show-current-template --activate
 
 # Symlink Plugin and Activate
-mkdir -p "/workspace/wordpress/wp-content/plugins/yourplugin"
-cd /workspace/wordpress/wp-content/plugins/yourplugin
+mkdir -p "/workspace/wordpress/wp-content/plugins/communityhive"
+cd /workspace/wordpress/wp-content/plugins/communityhive
 ln -s /workspace/src
 ln -s /workspace/vendor
-ln -s /workspace/yourplugin.php
+ln -s /workspace/communityhive.php
 cd /workspace/wordpress
-wp plugin activate yourplugin
+wp plugin activate communityhive
 
 # Import Demo Content
 wp plugin install wordpress-importer --activate

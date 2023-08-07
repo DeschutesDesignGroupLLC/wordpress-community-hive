@@ -124,7 +124,7 @@ return [
     |
     */
 
-    'migrations' => 'yourplugin_migrations',
+    'migrations' => 'communityhive_migrations',
 
     /*
     |--------------------------------------------------------------------------

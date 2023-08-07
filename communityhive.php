@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: Your Plugin
- * Author: Your Company
- * Author URI: https://www.yourcompany.com
- * Description: This is a description of your plugin.
+ * Plugin Name: Community Hive
+ * Author: Invision Power Services, Inc.
+ * Author URI: https://www.invisioncommunity.com
+ * Description: Community Hive allows your members to follow their favorite communities to receive updates.
  * Version: 1.0.0
  */
 

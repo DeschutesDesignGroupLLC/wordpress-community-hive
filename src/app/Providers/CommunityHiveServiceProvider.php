@@ -4,7 +4,7 @@ namespace WordpressPluginTemplate\App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class PluginServiceProvider extends ServiceProvider
+class CommunityHiveServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
@@ -13,7 +13,7 @@ class PluginServiceProvider extends ServiceProvider
 
     public function registerShortcode()
     {
-        add_shortcode('yourplugin_shortcode', function () {
+        add_shortcode('communityhive_shortcode', function () {
             return view('shortcodes.plugin');
         });
     }
