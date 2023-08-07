@@ -1,9 +1,9 @@
 <?php
 
-namespace WordpressPluginTemplate\Database\seeders;
+namespace CommunityHive\Database\seeders;
 
+use CommunityHive\App\Models\PluginModel;
 use Illuminate\Database\Seeder;
-use WordpressPluginTemplate\App\Models\PluginModel;
 
 class DatabaseSeeder extends Seeder
 {

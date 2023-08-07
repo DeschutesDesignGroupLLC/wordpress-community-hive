@@ -192,7 +192,7 @@ return [
         /*
          * Application Service Providers...
          */
-        WordpressPluginTemplate\App\Providers\CommunityHiveServiceProvider::class,
+        CommunityHive\App\Providers\CommunityHiveServiceProvider::class,
     ],
 
     /*

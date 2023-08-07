@@ -10,9 +10,9 @@
     },
     "autoload": {
         "psr-4": {
-            "WordpressPluginTemplate\\App\\": "src/app",
-            "WordpressPluginTemplate\\Database\\Factories\\": "src/database/factories/",
-            "WordpressPluginTemplate\\Database\\Seeders\\": "src/database/seeders/"
+            "CommunityHive\\App\\": "src/app",
+            "CommunityHive\\Database\\Factories\\": "src/database/factories/",
+            "CommunityHive\\Database\\Seeders\\": "src/database/seeders/"
         }
     },
     "autoload-dev": {

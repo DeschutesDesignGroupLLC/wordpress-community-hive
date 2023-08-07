@@ -1,6 +1,6 @@
 <?php
 
-namespace WordpressPluginTemplate\Database\Factories;
+namespace CommunityHive\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

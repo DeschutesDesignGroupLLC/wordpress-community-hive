@@ -1,6 +1,6 @@
 <?php
 
-namespace WordpressPluginTemplate\App\Providers;
+namespace CommunityHive\App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

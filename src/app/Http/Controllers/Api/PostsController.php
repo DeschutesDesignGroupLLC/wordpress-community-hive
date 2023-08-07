@@ -1,6 +1,6 @@
 <?php
 
-namespace WordpressPluginTemplate\App\Http\Controllers\Api;
+namespace CommunityHive\App\Http\Controllers\Api;
 
 use Illuminate\Routing\Controller;
 
