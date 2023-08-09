@@ -3,8 +3,10 @@
 ])
 
 @section('content')
-    <div class='flex flex-col justify-center items-center space space-y-6'>
-        <div class='text-gray-600 text-xl leading-6'>
+    <div class='flex flex-col justify-center items-center space space-y-6 py-4'>
+        <div class='text-3xl font-bold tracking-tight leading-6 text-slate-700'>Community Hive Content</div>
+
+        <div class='text-base leading-6'>
             Community Hive allows your members to follow their favorite communities to receive updates.
         </div>
 
