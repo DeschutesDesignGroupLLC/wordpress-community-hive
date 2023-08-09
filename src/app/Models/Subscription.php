@@ -10,4 +10,9 @@ class Subscription extends Model
      * @var string
      */
     protected $table = 'communityhive_subscriptions';
+
+    /**
+     * @var string[]
+     */
+    protected $fillable = ['user_id'];
 }

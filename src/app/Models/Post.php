@@ -2,6 +2,7 @@
 
 namespace CommunityHive\App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
@@ -20,4 +21,11 @@ class Post extends Model
         'post_modified' => 'datetime',
         'post_modified_gmt' => 'datetime',
     ];
+
+    public function scopeForCommunityHive(Builder $builder): void
+    {
+        $builder->where('post_type', '=', 'post');
+        $builder->where('post_status', '=', 'publish');
+        $builder->limit(10);
+    }
 }

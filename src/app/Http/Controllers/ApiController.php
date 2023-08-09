@@ -16,7 +16,7 @@ class ApiController extends Controller
             'sync' => response()->json([
                 'test' => 'test',
             ]),
-            default => PostResource::collection(Post::all())
+            default => PostResource::collection(Post::forCommunityHive()->get())
         };
     }
 
