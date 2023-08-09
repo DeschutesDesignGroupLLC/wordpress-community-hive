@@ -2,7 +2,7 @@
 
 namespace CommunityHive\App\Http\Controllers;
 
-use CommunityHive\App\Http\Resources\PostResource;
+use CommunityHive\App\Http\Resources\ApiCollection;
 use CommunityHive\App\Models\Post;
 use Illuminate\Routing\Controller;
 
@@ -16,7 +16,7 @@ class ApiController extends Controller
             'sync' => response()->json([
                 'test' => 'test',
             ]),
-            default => PostResource::collection(Post::forCommunityHive()->get())
+            default => new ApiCollection(Post::forCommunityHive()->get())
         };
     }
 
