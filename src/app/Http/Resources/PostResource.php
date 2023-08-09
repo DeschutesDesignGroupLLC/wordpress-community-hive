@@ -16,7 +16,7 @@ class PostResource extends JsonResource
             'content' => trim(Str::replace(['<!-- wp:paragraph -->', '<!-- /wp:paragraph -->'], '', $this->post_content)),
             'date' => Carbon::parse($this->post_date)->getTimestamp(),
             'author' => User::find($this->post_author)?->display_name,
-            'key1' => $this->id,
+            'key1' => $this->ID,
             'key2' => null,
             'replies' => $this->comment_count,
             'reactions' => null,
