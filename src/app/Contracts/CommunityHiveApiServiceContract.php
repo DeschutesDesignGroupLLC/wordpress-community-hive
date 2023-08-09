@@ -4,8 +4,5 @@ namespace CommunityHive\App\Contracts;
 
 interface CommunityHiveApiServiceContract
 {
-    /**
-     * @return array|mixed
-     */
-    public function callApi($endpoint): mixed;
+    public function callApi(string $endpoint, array $data = []): mixed;
 }

@@ -2,9 +2,7 @@
     "require": {
         "php": "^8.1",
         "roots/acorn": "^3.2",
-        "guzzlehttp/guzzle": "^7.0",
-        "firebase/php-jwt": "^6.8",
-        "web-token/jwt-framework": "^3.2"
+        "guzzlehttp/guzzle": "^7.0"
     },
     "require-dev": {
         "spatie/laravel-ignition": "^1.6",
@@ -13,14 +11,14 @@
     },
     "autoload": {
         "psr-4": {
-            "CommunityHive\\App\\": "src/app",
-            "CommunityHive\\Database\\Factories\\": "src/database/factories/",
-            "CommunityHive\\Database\\Seeders\\": "src/database/seeders/"
+            "CommunityHive\\App\\": "app",
+            "CommunityHive\\Database\\Factories\\": "database/factories/",
+            "CommunityHive\\Database\\Seeders\\": "database/seeders/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "src/tests/"
+            "Tests\\": "tests/"
         }
     },
     "post-autoload-dump": [

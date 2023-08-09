@@ -12,8 +12,11 @@ use Roots\Acorn\Bootloader;
 /**
  * Set constants
  */
-\define('WP_ENV', 'local');
+\define('WP_ENV', 'development');
 \define('ACORN_BASEPATH', rtrim(plugin_dir_path(__FILE__).'src', '/'));
+\define('COMMUNITY_HIVE_PLUGIN_VERSION', '1.0.0');
+\define('COMMUNITY_HIVE_BASE_URL', 'https://staging.communityhive.com/api/v1/');
+\define('COMMUNITY_HIVE_PLUGIN_FILE', __FILE__);
 
 /**
  * Experimental features
