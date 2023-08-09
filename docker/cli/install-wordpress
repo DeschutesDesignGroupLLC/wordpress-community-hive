@@ -2,7 +2,7 @@
 
 # Install WordPress.
 wp core install \
-  --title="Wordpress Plugin Template" \
+  --title="Wordpress Community Hive" \
   --admin_user="wordpress" \
   --admin_password="wordpress" \
   --admin_email="admin@example.com" \

@@ -1,5 +1,5 @@
 {
-  "name": "Wordpress Plugin Template",
+  "name": "Wordpress Community Hive",
   "dockerComposeFile": "docker-compose.yml",
   "service": "app",
   "workspaceFolder": "/workspace",

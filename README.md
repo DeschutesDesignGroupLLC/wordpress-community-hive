@@ -1,12 +1,6 @@
-# Wordpress Plugin Template (Laravel)
+# Wordpress Community Hive Plugin
 
-The following Wordpress plugin template utilizes the [Roots Acorns](https://github.com/roots/acorn) library to provide a Laravel-like framework for developing a Wordpress plugin.
-
-## Quickstart
-
-Launch a new Github Codespace to start creating a Wordpress plugin.
-
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/DeschutesDesignGroupLLC/wordpress-plugin-template)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/DeschutesDesignGroupLLC/wordpress-community-hive)
 
 ## Starting A Local Wordpress Docker Development Environment
 
@@ -41,12 +35,6 @@ Compile and run the Webpack development server. Webpack will utilize hot reloadi
 Compile your assets for production.
 
 `npm run build`
-
-### Accessing Wordpress
-
-Nginx is configured to listen to any server name. You can customize a default server name by editing the `nginx/conf.d/site.conf` configuration file.
-
-The plugin can be accessed at `http://localhost/hello-world`
 
 ## CLI
 
