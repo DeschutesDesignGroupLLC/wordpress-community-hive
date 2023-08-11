@@ -5,7 +5,7 @@ ZIP_FILE="communityhive.zip"
 DEST_DIR="vendor"
 
 # Zip the source directory
-zip -r "$ZIP_FILE" "$SOURCE_DIR"
+zip -r "$ZIP_FILE" "$SOURCE_DIR" -x "*.log"
 
 # Zip the vendor directory
 zip -r "$ZIP_FILE" "$DEST_DIR"

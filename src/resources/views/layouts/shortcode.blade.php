@@ -1,2 +1,2 @@
-@vite('src/resources/js/app.js')
+<script src="{{ asset('app.js') }}"></script>
 @yield('content')

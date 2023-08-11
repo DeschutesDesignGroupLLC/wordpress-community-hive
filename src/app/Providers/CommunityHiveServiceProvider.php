@@ -9,6 +9,9 @@ use CommunityHive\App\Models\User;
 use CommunityHive\App\Services\CommunityHiveApiService;
 use CommunityHive\App\Services\CommunityHiveUserService;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,9 +38,10 @@ class CommunityHiveServiceProvider extends ServiceProvider
 
     public function registerHooks(): void
     {
-        register_activation_hook(COMMUNITY_HIVE_PLUGIN_FILE, function () {
-            Artisan::call('migrate');
-        });
+        register_activation_hook(COMMUNITY_HIVE_PLUGIN_FILE, [$this, 'activationRoutine']);
+        register_uninstall_hook(COMMUNITY_HIVE_PLUGIN_FILE, [CommunityHiveServiceProvider::class, 'uninstallRoutine']);
+
+        add_action('init', [$this, 'pluginInitiated']);
 
         add_action('set_user_role', function ($id) {
             $userService = $this->app->make(CommunityHiveUserService::class);
@@ -68,6 +72,13 @@ class CommunityHiveServiceProvider extends ServiceProvider
                 'site_email' => get_bloginfo('admin_email'),
                 'site_software' => 'wordpress',
             ]);
+
+            if (isset($activateResponse['error'])) {
+                Cache::put('error', Str::title($activateResponse['error']), 60);
+
+                wp_redirect(admin_url('/admin.php?page=community-hive'));
+                exit;
+            }
 
             if (isset($activateResponse['hive_key'], $activateResponse['hive_site_id'])) {
                 add_option('community_hive_key', $activateResponse['hive_key']);
@@ -103,6 +114,29 @@ class CommunityHiveServiceProvider extends ServiceProvider
             wp_redirect(admin_url('/admin.php?page=community-hive'));
             exit;
         });
+    }
+
+    public function pluginInitiated(): void
+    {
+        //
+    }
+
+    public function activationRoutine(): void
+    {
+        Artisan::call('migrate', ['--force' => true]);
+        Log::debug(Artisan::output());
+    }
+
+    public static function uninstallRoutine(): void
+    {
+        Schema::drop('communityhive_migrations');
+        Schema::drop('communityhive_subscriptions');
+
+        delete_option('community_hive_key');
+        delete_option('community_hive_site_key');
+        delete_option('community_hive_site_id');
+        delete_option('community_hive_categories');
+        delete_option('community_hive_tags');
     }
 
     public function buildAdminControlPanel(): void
