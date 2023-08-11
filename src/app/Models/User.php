@@ -16,14 +16,6 @@ class User extends Model
      */
     protected $primaryKey = 'ID';
 
-    public function groupHash(): string
-    {
-        $hash = array_filter($this->asWordpressUser()?->roles);
-        natcasesort($hash);
-
-        return implode(',', $hash);
-    }
-
     public function asWordpressUser(): \WP_User|false
     {
         return get_user_by('id', $this->getKey());

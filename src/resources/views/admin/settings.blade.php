@@ -6,7 +6,7 @@
     <div class='flex flex-col justify-center items-center space space-y-6 py-4 max-w-4xl mx-auto'>
         <div class='text-3xl font-bold tracking-tight leading-6 text-secondary'>Community Hive Content</div>
 
-        @if($activated)
+        @if(!$activated)
             <div class='text-base text-black font-light leading-6 text-center'>
                 Community Hive allows your members to follow their favorite communities to receive updates.
             </div>

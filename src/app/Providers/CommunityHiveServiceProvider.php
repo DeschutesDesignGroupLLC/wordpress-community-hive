@@ -3,9 +3,11 @@
 namespace CommunityHive\App\Providers;
 
 use CommunityHive\App\Contracts\CommunityHiveApiServiceContract;
+use CommunityHive\App\Contracts\CommunityHiveUserServiceContract;
 use CommunityHive\App\Models\Subscription;
 use CommunityHive\App\Models\User;
 use CommunityHive\App\Services\CommunityHiveApiService;
+use CommunityHive\App\Services\CommunityHiveUserService;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -17,6 +19,7 @@ class CommunityHiveServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(CommunityHiveApiServiceContract::class, CommunityHiveApiService::class);
+        $this->app->bind(CommunityHiveUserServiceContract::class, CommunityHiveUserService::class);
 
         $this->registerShortcode();
         $this->registerHooks();
@@ -37,10 +40,11 @@ class CommunityHiveServiceProvider extends ServiceProvider
         });
 
         add_action('set_user_role', function ($id) {
+            $userService = $this->app->make(CommunityHiveUserService::class);
             $apiService = $this->app->make(CommunityHiveApiService::class);
             $apiService->callApi('groupupdate', [
                 'site_member_id' => $id,
-                'group_hash' => User::find($id)?->groupHash() ?? 'guest',
+                'group_hash' => $userService->groupHashForUser(User::find($id)),
             ]);
         });
 
@@ -54,6 +58,7 @@ class CommunityHiveServiceProvider extends ServiceProvider
 
         add_action('admin_post_community_hive_activate_community', function () {
             $key = Str::random(40);
+            $userService = $this->app->make(CommunityHiveUserService::class);
             $apiService = $this->app->make(CommunityHiveApiService::class);
             $activateResponse = $apiService->callApi('activate', [
                 'site_name' => get_bloginfo('name'),
@@ -76,8 +81,8 @@ class CommunityHiveServiceProvider extends ServiceProvider
                 ]);
 
                 $subscribeResponse = $apiService->callApi('subscribe', [
-                    'site_member_id' => $key,
-                    'group_hash' => $user->groupHash(),
+                    'site_member_id' => $user->getKey(),
+                    'group_hash' => $userService->groupHashForUser($user),
                     'member_email' => $user->user_email,
                 ]);
 

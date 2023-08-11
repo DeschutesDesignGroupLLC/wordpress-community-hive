@@ -61,7 +61,7 @@ class CommunityHiveApiService implements CommunityHiveApiServiceContract
         $jwsBuilder = new JWSBuilder(new AlgorithmManager([new HS256()]));
 
         $defaultPayload = [
-            'sub' => get_option('community_hive_site_id'),
+            'sub' => get_option('community_hive_site_id', 'community_id_not_available'),
             'iss' => site_url(),
             'iat' => time(),
             'nbf' => time(),

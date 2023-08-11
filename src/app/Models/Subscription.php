@@ -14,5 +14,12 @@ class Subscription extends Model
     /**
      * @var string[]
      */
-    protected $fillable = ['user_id'];
+    protected $fillable = ['user_id', 'confirmed'];
+
+    /**
+     * @var string[]
+     */
+    protected $casts = [
+        'confirmed' => 'boolean',
+    ];
 }
