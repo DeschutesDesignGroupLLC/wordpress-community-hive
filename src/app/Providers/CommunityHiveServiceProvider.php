@@ -55,7 +55,7 @@ class CommunityHiveServiceProvider extends ServiceProvider
         add_action('admin_post_community_hive_activate_community', function () {
             $key = Str::random(40);
             $apiService = $this->app->make(CommunityHiveApiService::class);
-            $response = $apiService->callApi('activate', [
+            $activateResponse = $apiService->callApi('activate', [
                 'site_name' => get_bloginfo('name'),
                 'site_url' => site_url(),
                 'site_api_url' => site_url('api/community-hive'),
@@ -64,15 +64,36 @@ class CommunityHiveServiceProvider extends ServiceProvider
                 'site_software' => 'wordpress',
             ]);
 
-            if (isset($response['hive_key'], $response['hive_site_id'])) {
+            if (isset($activateResponse['hive_key'], $activateResponse['hive_site_id'])) {
+                add_option('community_hive_key', $activateResponse['hive_key']);
+                add_option('community_hive_site_key', $key);
+                add_option('community_hive_site_id', $activateResponse['hive_site_id']);
+
+                $user = User::find(get_current_user_id());
+
                 Subscription::create([
-                    'user_id' => get_current_user_id(),
+                    'user_id' => $user->getKey(),
                 ]);
 
-                add_option('community_hive_key', $response['hive_key']);
-                add_option('community_hive_site_key', $key);
-                add_option('community_hive_site_id', $response['hive_site_id']);
+                $subscribeResponse = $apiService->callApi('subscribe', [
+                    'site_member_id' => $key,
+                    'group_hash' => $user->groupHash(),
+                    'member_email' => $user->user_email,
+                ]);
+
+                if (isset($subscribeResponse['redirect_url'])) {
+                    wp_redirect($subscribeResponse['redirect_url']);
+                    exit;
+                }
             }
+
+            wp_redirect(admin_url('/admin.php?page=community-hive'));
+            exit;
+        });
+
+        add_action('admin_post_community_hive_save_settings', function () {
+            update_option('community_hive_categories', implode(',', request()->get('categories', [])));
+            update_option('community_hive_tags', implode(',', request()->get('tags', [])));
 
             wp_redirect(admin_url('/admin.php?page=community-hive'));
             exit;
@@ -95,7 +116,10 @@ class CommunityHiveServiceProvider extends ServiceProvider
     {
         return response()->view('admin.settings', [
             'activated' => get_option('community_hive_site_key') && get_option('community_hive_site_id'),
-            'categories' => get_categories(),
+            'categories' => get_categories(['hide_empty' => false]),
+            'categories_selected' => explode(',', get_option('community_hive_categories')),
+            'tags' => get_tags(['hide_empty' => false]),
+            'tags_selected' => explode(',', get_option('community_hive_tags')),
         ])->send();
     }
 }

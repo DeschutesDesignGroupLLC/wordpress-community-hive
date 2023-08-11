@@ -4,11 +4,13 @@ namespace CommunityHive\App\Http\Controllers;
 
 use CommunityHive\App\Http\Resources\ApiCollection;
 use CommunityHive\App\Models\Post;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
 
 class ApiController extends Controller
 {
-    public function index()
+    public function index(): ApiCollection|JsonResponse
     {
         $type = request()->get('request_type');
 
@@ -20,10 +22,21 @@ class ApiController extends Controller
         };
     }
 
-    public function show($url = null)
+    public function show(): JsonResponse|RedirectResponse
     {
-        $item = json_decode(base64_decode(urldecode($url)), true);
+        if ($item = request()->get('click')) {
+            $decoded = base64_decode($item);
+            parse_str($decoded, $id);
 
-        dd($item);
+            if (isset($id['key1']) && $url = get_permalink($id['key1'])) {
+                return response()->redirectTo($url);
+            }
+
+            return response()->json([
+                'error' => 'Unable to redirect to post',
+            ]);
+        }
+
+        return response()->redirectTo(site_url());
     }
 }

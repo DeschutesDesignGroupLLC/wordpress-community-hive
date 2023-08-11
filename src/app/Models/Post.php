@@ -4,6 +4,7 @@ namespace CommunityHive\App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Post extends Model
 {
@@ -26,6 +27,30 @@ class Post extends Model
     {
         $builder->where('post_type', '=', 'post');
         $builder->where('post_status', '=', 'publish');
+
+        $builder->where(function ($builder) {
+            $builder->where(function () use ($builder) {
+                if ($tags = get_option('community_hive_tags')) {
+                    $builder->whereExists(function (\Illuminate\Database\Query\Builder $builder) use ($tags) {
+                        $builder->select(DB::raw(1))
+                            ->from('term_relationships')
+                            ->whereIn('term_relationships.term_taxonomy_id', explode(',', $tags))
+                            ->whereColumn('term_relationships.object_id', 'posts.id');
+                    });
+                }
+
+                if ($categories = get_option('community_hive_categories')) {
+                    $builder->orWhereExists(function (\Illuminate\Database\Query\Builder $builder) use ($categories) {
+                        $builder->select(DB::raw(1))
+                            ->from('term_relationships')
+                            ->whereIn('term_relationships.term_taxonomy_id', explode(',', $categories))
+                            ->whereColumn('term_relationships.object_id', 'posts.id');
+                    });
+                }
+            });
+        });
+
+        $builder->orderBy('post_date', 'desc');
         $builder->limit(10);
     }
 }

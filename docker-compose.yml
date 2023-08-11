@@ -11,6 +11,9 @@ services:
       - './nginx/conf.d/site.conf:/etc/nginx/conf.d/site.conf'
     networks:
       - wordpress
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+      - 'lvh.me:127.0.0.1'
     depends_on:
       - mysql
       - wordpress
@@ -44,6 +47,9 @@ services:
       - './php/conf.d/php.ini:/usr/local/etc/php/conf.d/php.ini'
     networks:
       - wordpress
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+      - 'lvh.me:127.0.0.1'
     restart: unless-stopped
     environment:
       WORDPRESS_DB_HOST: mysql
@@ -64,6 +70,9 @@ services:
       - nginx
     networks:
       - wordpress
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+      - 'lvh.me:127.0.0.1'
     volumes:
       - './wordpress:/var/www/html'
       - './communityhive.php:/var/www/html/wp-content/plugins/communityhive/communityhive.php'
