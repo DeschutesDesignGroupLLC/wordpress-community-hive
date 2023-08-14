@@ -1,10 +1,12 @@
 <?php
 /**
  * Plugin Name: Community Hive
+ * Plugin URI: https://www.communityhive.com
  * Author: Invision Power Services, Inc.
  * Author URI: https://www.invisioncommunity.com
  * Description: Community Hive allows your members to follow their favorite communities to receive updates.
  * Version: 1.0.0
+ * Requires PHP: 8.1
  */
 
 use Roots\Acorn\Bootloader;

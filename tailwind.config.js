@@ -1,3 +1,4 @@
+import defaultTheme from 'tailwindcss/defaultTheme.js'
 import forms from '@tailwindcss/forms'
 
 /** @type {import('tailwindcss').Config} */
@@ -11,7 +12,7 @@ export default {
       },
     },
     fontFamily: {
-      'montserrat': ['montserrat', 'ui-sans-serif', 'system-ui']
+      'montserrat': ['montserrat', ...defaultTheme.fontFamily.sans]
     }
   },
   plugins: [forms],

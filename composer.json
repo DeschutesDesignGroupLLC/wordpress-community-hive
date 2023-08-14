@@ -3,14 +3,12 @@
         "php": "^8.1",
         "roots/acorn": "^3.2",
         "guzzlehttp/guzzle": "^7.0",
-        "firebase/php-jwt": "^6.8",
         "web-token/jwt-framework": "^3.2"
     },
     "require-dev": {
         "spatie/laravel-ignition": "^1.6",
         "laravel/pint": "^v1.10.5",
-        "fzaninotto/faker": "^1.5",
-        "bamarni/composer-bin-plugin": "^1.8"
+        "fzaninotto/faker": "^1.5"
     },
     "autoload": {
         "psr-4": {
@@ -26,10 +24,5 @@
     },
     "post-autoload-dump": [
         "Roots\\Acorn\\ComposerScripts::postAutoloadDump"
-    ],
-    "config": {
-        "allow-plugins": {
-            "bamarni/composer-bin-plugin": true
-        }
-    }
+    ]
 }
