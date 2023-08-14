@@ -42,7 +42,7 @@ class CommunityHiveUserService implements CommunityHiveUserServiceContract
         Subscription::query()->where('user_id', '=', $userId)->delete();
     }
 
-    public function groupHashForUser(?User $user = null): string
+    public function groupHashForUser(User $user = null): string
     {
         if ($user) {
             $hash = array_filter($user->asWordpressUser()?->roles);

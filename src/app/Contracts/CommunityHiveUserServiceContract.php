@@ -10,5 +10,5 @@ interface CommunityHiveUserServiceContract
 
     public function unfollowUser($userId = null): void;
 
-    public function groupHashForUser(?User $user = null): string;
+    public function groupHashForUser(User $user = null): string;
 }
