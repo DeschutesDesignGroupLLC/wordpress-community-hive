@@ -49,8 +49,7 @@
             </div>
 
             <form action='{{ route('settings.index', [], false) }}' method='post'>
-                <input type='hidden' name='action' value='community_hive_activate_community'>
-                <button type="submit" class="rounded-md bg-primary hover:bg-primary/90 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Activate Community</button>
+                <button type="submit" class="border-none rounded-md bg-primary hover:bg-primary/90 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Activate Community</button>
             </form>
         @else
             <div class='text-sm sm:text-base text-black font-light leading-6 text-center'>
@@ -58,8 +57,6 @@
             </div>
 
             <form action='{{ route('settings.store', [], false) }}' method='post' class='form w-full'>
-                <input type='hidden' name='action' value='community_hive_save_settings'>
-
                 <div class='flex flex-col space-y-4'>
                     <div class='grid grid-row grid-cols-1 md:grid-cols-2 gap-x-0 gap-y-6 md:gap-x-12'>
                         <div class='flex flex-col justify-between'>
@@ -79,7 +76,6 @@
                                 @endforeach
                             </select>
                         </div>
-
                         <div class='flex flex-col justify-between'>
                             <label for="login" class="mx-auto block text-sm font-medium leading-6 text-gray-900">Login Page</label>
                             <select id="login" name="login" class="mx-auto !form-multiselect !block !w-full !rounded-md !border-0 py-1.5 pl-3 !text-secondary !ring-1 !ring-inset !ring-gray-300 !focus:ring-2 !focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -89,7 +85,6 @@
                                 @endforeach
                             </select>
                         </div>
-
                         <div class='flex flex-col justify-between'>
                             <label for="registration" class="mx-auto block text-sm font-medium leading-6 text-gray-900">Registration Page</label>
                             <select id="registration" name="registration" class="mx-auto !form-multiselect !block !w-full !rounded-md !border-0 py-1.5 pl-3 !text-secondary !ring-1 !ring-inset !ring-gray-300 !focus:ring-2 !focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -99,7 +94,6 @@
                                 @endforeach
                             </select>
                         </div>
-
                         <div class='flex flex-col justify-between'>
                             <label for="follow" class="mx-auto block text-sm font-medium leading-6 text-gray-900">Follow Page</label>
                             <select id="follow" name="follow" class="mx-auto !form-multiselect !block !w-full !rounded-md !border-0 py-1.5 pl-3 !text-secondary !ring-1 !ring-inset !ring-gray-300 !focus:ring-2 !focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -110,8 +104,7 @@
                         </div>
                     </div>
                 </div>
-
-                <button type="submit" class="w-full mt-8 rounded-md bg-primary hover:bg-primary/90 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Save Settings</button>
+                <button type="submit" class="border-none w-full mt-8 rounded-md bg-primary hover:bg-primary/90 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Save Settings</button>
             </form>
         @endif
     </div>

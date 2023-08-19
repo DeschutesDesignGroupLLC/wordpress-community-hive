@@ -24,7 +24,11 @@ class FollowController
                 return redirect()->to($login !== '' ? get_permalink($login) : wp_login_url());
 
             case 'follow':
-                $response = $apiService->callApi('subscribe');
+                $response = $apiService->callApi('subscribe', [
+                    'site_member_id' => 0,
+                    'group_hash' => 'guest',
+                    'member_email' => false,
+                ]);
 
                 if (isset($response['redirect_url'])) {
                     return redirect()->to($response['redirect_url']);

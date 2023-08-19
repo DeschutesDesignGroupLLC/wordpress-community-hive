@@ -31,9 +31,8 @@
         <div class='text-sm text-center'>Following on Community Hive will share the email address entered with <a href='https://communityhive.com' target='_blank'>communityhive.com</a>.</div>
 
         <form action='{{ route('follow.store') }}' method='post' class='form w-full sm:!w-1/2 md:!w-1/3'>
-            <input type='hidden' name='action' value='community_hive_follow'>
             <input type="email" name="email" id="email" value='@if($user){{ $user->user_email }}@endif' class="!form-input !block !w-full !rounded-md !border-0 py-1.5 !text-secondary !shadow-sm !ring-1 !ring-inset !ring-gray-300 placeholder:text-secondary !focus:ring-2 !focus:ring-inset focus:ring-[#2A9C66] sm:text-sm sm:leading-6" placeholder="you@example.com">
-            <button type="submit" class="w-full mt-4 rounded-md bg-primary hover:bg-primary/90 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 !focus-visible:outline-primary">Follow</button>
+            <button type="submit" class="w-full mt-4 rounded-md bg-primary hover:bg-primary/90 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary focus:bg-primary">Follow</button>
         </form>
     @else
         <div class='grid grid-row grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 pt-2 md:pt-6 w-full'>
@@ -43,7 +42,7 @@
                         <div class='font-bold'>Create an account</div>
                         <div class='text-sm text-center'>Sign up for a new account in our community. It's easy!</div>
                     </div>
-                    <a href='{{ route('follow.index', ['action' => 'register']) }}' class="!no-underline text-center w-full mt-4 rounded-md bg-primary hover:bg-primary/90 px-3.5 py-2.5 text-sm font-semibold hover:text-white text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 !focus-visible:outline-primary">Register a new account</a>
+                    <a href='{{ route('follow.index', ['action' => 'register']) }}' class="!no-underline text-center w-full mt-4 rounded-md bg-primary hover:bg-primary/90 px-3.5 py-2.5 text-sm font-semibold hover:text-white text-white shadow-sm focus:outline-none focus:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Register a new account</a>
                 </div>
             </div>
             <div class='flex flex-col h-full'>
@@ -52,7 +51,7 @@
                         <div class='font-bold'>Sign in</div>
                         <div class='text-sm text-center'>Already have an account? Sign in here.</div>
                     </div>
-                    <a href='{{ route('follow.index', ['action' => 'login']) }}' class="!no-underline text-center w-full mt-4 rounded-md bg-primary hover:bg-primary/90 px-3.5 py-2.5 text-sm font-semibold hover:text-white text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 !focus-visible:outline-primary">Sign in now</a>
+                    <a href='{{ route('follow.index', ['action' => 'login']) }}' class="!no-underline text-center w-full mt-4 rounded-md bg-primary hover:bg-primary/90 px-3.5 py-2.5 text-sm font-semibold hover:text-white text-white shadow-sm focus:outline-none focus:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Sign in now</a>
                 </div>
             </div>
             <div class='flex flex-col h-full'>
@@ -61,7 +60,7 @@
                         <div class='font-bold'>Follow anonymously</div>
                         <div class='text-sm text-center'>Follow content from this community anonymously.</div>
                     </div>
-                    <a href='{{ route('follow.index', ['action' => 'follow']) }}' class="!no-underline text-center w-full mt-4 rounded-md bg-primary hover:bg-primary/90 px-3.5 py-2.5 text-sm font-semibold hover:text-white text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 !focus-visible:outline-primary">Follow now</a>
+                    <a href='{{ route('follow.index', ['action' => 'follow']) }}' class="!no-underline text-center w-full mt-4 rounded-md bg-primary hover:bg-primary/90 px-3.5 py-2.5 text-sm font-semibold hover:text-white text-white shadow-sm focus:outline-none focus:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Follow now</a>
                 </div>
             </div>
         </div>

@@ -15,6 +15,9 @@ export default {
       'montserrat': ['montserrat', ...defaultTheme.fontFamily.sans]
     }
   },
+  corePlugins: {
+    preflight: false
+  },
   plugins: [forms],
 }
 
