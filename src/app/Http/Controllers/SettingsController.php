@@ -31,9 +31,9 @@ class SettingsController
         }
 
         if (isset($activateResponse['hive_key'], $activateResponse['hive_site_id'])) {
-            //                add_option('community_hive_key', $activateResponse['hive_key']);
-            //                add_option('community_hive_site_key', $key);
-            //                add_option('community_hive_site_id', $activateResponse['hive_site_id']);
+            add_option('community_hive_key', $activateResponse['hive_key']);
+            add_option('community_hive_site_key', $key);
+            add_option('community_hive_site_id', $activateResponse['hive_site_id']);
 
             $user = User::find(get_current_user_id());
 

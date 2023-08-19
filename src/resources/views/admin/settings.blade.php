@@ -43,7 +43,7 @@
             </div>
         @endif
 
-        @if($activated)
+        @if(!$activated)
             <div class='text-sm sm:text-base text-black font-light leading-6 text-center'>
                 Community Hive allows your members to follow their favorite communities to receive updates.
             </div>
