@@ -4,7 +4,7 @@
 
 @section('content')
     <div class='flex flex-col justify-center items-center space space-y-6 py-4 max-w-4xl mx-auto'>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 341.7 64" class='w-1/4'>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 341.7 64" class='w-1/2 md:w-1/3'>
             <path fill="#2a9c66"
                   d="M0 32.2C-.1 14.5 14.2.1 31.9.1h22.2v25.8H42V3.6h-6.4c-.7 0-1.4.2-2 .4h.1c-2.2.9-3.7 3.1-3.7 5.6v44.9c0 3.3 2.7 6 6 6h6.1V38.2h12.1V64H32.3C14.7 63.9.1 49.9 0 32.2Z"></path>
             <path fill="#2a9c66"
@@ -28,12 +28,27 @@
             </div>
         @endif
 
-        @if(!$activated)
+        @if(\Illuminate\Support\Facades\Cache::has('message'))
+            <div class="rounded-md bg-green-50 p-4">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-sm font-medium text-green-800">{{ \Illuminate\Support\Facades\Cache::pull('message') }}</h3>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        @if($activated)
             <div class='text-sm sm:text-base text-black font-light leading-6 text-center'>
                 Community Hive allows your members to follow their favorite communities to receive updates.
             </div>
 
-            <form action='admin-post.php' method='POST'>
+            <form action='{{ route('settings.index', [], false) }}' method='post'>
                 <input type='hidden' name='action' value='community_hive_activate_community'>
                 <button type="submit" class="rounded-md bg-primary hover:bg-primary/90 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Activate Community</button>
             </form>
@@ -42,30 +57,61 @@
                 Choose which content types should be shown in Community Hive. User roles are always used when displaying content.
             </div>
 
-            <form action='admin-post.php' method='POST' class='form w-full'>
+            <form action='{{ route('settings.store', [], false) }}' method='post' class='form w-full'>
                 <input type='hidden' name='action' value='community_hive_save_settings'>
 
-                <div class='grid grid-row grid-cols-1 md:grid-cols-2 gap-6 md:gap-12'>
-                    <div class='flex flex-col justify-between'>
-                        <label for="categories" class="mx-auto block text-sm font-medium leading-6 text-gray-900">Categories</label>
-                        <select multiple id="categories" name="categories[]" class="mx-auto !form-multiselect !block !w-full !rounded-md !border-0 py-1.5 pl-3 !text-secondary !ring-1 !ring-inset !ring-gray-300 !focus:ring-2 !focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            @foreach($categories as $category)
-                                <option @selected(\in_array($category->term_taxonomy_id, $categories_selected)) value='{{ $category->term_taxonomy_id }}'>{{ $category->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                <div class='flex flex-col space-y-4'>
+                    <div class='grid grid-row grid-cols-1 md:grid-cols-2 gap-x-0 gap-y-6 md:gap-x-12'>
+                        <div class='flex flex-col justify-between'>
+                            <label for="categories" class="mx-auto block text-sm font-medium leading-6 text-gray-900">Categories</label>
+                            <select multiple id="categories" name="categories[]" class="mx-auto !form-multiselect !block !w-full !rounded-md !border-0 py-1.5 pl-3 !text-secondary !ring-1 !ring-inset !ring-gray-300 !focus:ring-2 !focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                @foreach($categories as $category)
+                                    <option @selected(\in_array($category->term_taxonomy_id, explode(',', get_option('community_hive_categories')))) value='{{ $category->term_taxonomy_id }}'>{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
-                    <div class='flex flex-col justify-between'>
-                        <label for="tags" class="mx-auto block text-sm font-medium leading-6 text-gray-900">Tags</label>
-                        <select multiple id="tags" name="tags[]" class="mx-auto !form-multiselect !block !w-full !rounded-md !border-0 py-1.5 pl-3 !text-secondary !ring-1 !ring-inset !ring-gray-300 !focus:ring-2 !focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            @foreach($tags as $tag)
-                                <option @selected(\in_array($tag->term_taxonomy_id, $tags_selected)) value='{{ $tag->term_taxonomy_id }}'>{{ $tag->name }}</option>
-                            @endforeach
-                        </select>
+                        <div class='flex flex-col justify-between'>
+                            <label for="tags" class="mx-auto block text-sm font-medium leading-6 text-gray-900">Tags</label>
+                            <select multiple id="tags" name="tags[]" class="mx-auto !form-multiselect !block !w-full !rounded-md !border-0 py-1.5 pl-3 !text-secondary !ring-1 !ring-inset !ring-gray-300 !focus:ring-2 !focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                @foreach($tags as $tag)
+                                    <option @selected(\in_array($tag->term_taxonomy_id, explode(',', get_option('community_hive_tags')))) value='{{ $tag->term_taxonomy_id }}'>{{ $tag->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class='flex flex-col justify-between'>
+                            <label for="login" class="mx-auto block text-sm font-medium leading-6 text-gray-900">Login Page</label>
+                            <select id="login" name="login" class="mx-auto !form-multiselect !block !w-full !rounded-md !border-0 py-1.5 pl-3 !text-secondary !ring-1 !ring-inset !ring-gray-300 !focus:ring-2 !focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <option value=''>Use Default Login Page</option>
+                                @foreach($pages as $page)
+                                    <option @selected(get_option('community_hive_login_page') === (string) $page->ID) value='{{ $page->ID }}'>{{ $page->post_title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class='flex flex-col justify-between'>
+                            <label for="registration" class="mx-auto block text-sm font-medium leading-6 text-gray-900">Registration Page</label>
+                            <select id="registration" name="registration" class="mx-auto !form-multiselect !block !w-full !rounded-md !border-0 py-1.5 pl-3 !text-secondary !ring-1 !ring-inset !ring-gray-300 !focus:ring-2 !focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <option value=''>Use Default Registration Page</option>
+                                @foreach($pages as $page)
+                                    <option @selected(get_option('community_hive_registration_page') === (string) $page->ID) value='{{ $page->ID }}'>{{ $page->post_title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class='flex flex-col justify-between'>
+                            <label for="follow" class="mx-auto block text-sm font-medium leading-6 text-gray-900">Follow Page</label>
+                            <select id="follow" name="follow" class="mx-auto !form-multiselect !block !w-full !rounded-md !border-0 py-1.5 pl-3 !text-secondary !ring-1 !ring-inset !ring-gray-300 !focus:ring-2 !focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                @foreach($pages as $page)
+                                    <option @selected(get_option('community_hive_follow_page') === (string) $page->ID) value='{{ $page->ID }}'>{{ $page->post_title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                 </div>
 
-                <button type="submit" class="w-full mt-8 rounded-md bg-primary hover:bg-primary/90 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Save Settings</button>
+                <button type="submit" class="w-full mt-8 rounded-md bg-primary hover:bg-primary/90 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Save Settings</button>
             </form>
         @endif
     </div>

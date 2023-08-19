@@ -8,8 +8,10 @@ use Illuminate\Contracts\Support\Responsable;
 
 class ContentResponse implements Responsable
 {
-    public function toResponse($request): ApiCollection
+    public function toResponse($request): array
     {
-        return new ApiCollection(Post::forCommunityHive()->get());
+        return [
+            'results' => new ApiCollection(Post::forCommunityHive()->get()),
+        ];
     }
 }

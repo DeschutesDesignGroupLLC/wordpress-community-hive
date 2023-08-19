@@ -8,8 +8,12 @@ use CommunityHive\App\Models\User;
 
 class CommunityHiveUserService implements CommunityHiveUserServiceContract
 {
-    public function syncUsers(array $data = []): array
+    public function syncUsers(?array $data = []): ?array
     {
+        if (! $data) {
+            return null;
+        }
+
         $response = [];
         $seen = [];
         $userIds = array_keys($data);
@@ -37,9 +41,11 @@ class CommunityHiveUserService implements CommunityHiveUserServiceContract
         return $response;
     }
 
-    public function unfollowUser($userId = null): void
+    public function unfollowUser(string $userId = null): void
     {
-        Subscription::query()->where('user_id', '=', $userId)->delete();
+        if ($userId) {
+            Subscription::query()->where('user_id', '=', $userId)->delete();
+        }
     }
 
     public function groupHashForUser(User $user = null): string

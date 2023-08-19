@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class SyncUsersResponse implements Responsable
 {
-    public function __construct(protected array $data = [])
+    public function __construct(protected ?array $data = [])
     {
         //
     }

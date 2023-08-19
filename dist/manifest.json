@@ -1,0 +1,10 @@
+{
+  "app.css": "css/app.css",
+  "app.js": "js/app.js",
+  "shortcode.css": "css/shortcode.css",
+  "shortcode.js": "js/shortcode.js",
+  "runtime.js": "js/runtime.js",
+  "images/logo.svg": "images/logo.svg",
+  "images/icon.svg": "images/icon.svg",
+  "entrypoints.json": "entrypoints.json"
+}

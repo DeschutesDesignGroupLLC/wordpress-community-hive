@@ -5,11 +5,11 @@ namespace CommunityHive\App\Services;
 use CommunityHive\App\Contracts\CommunityHiveApiServiceContract;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 use Jose\Component\Core\AlgorithmManager;
 use Jose\Component\Core\JWK;
 use Jose\Component\Signature\Algorithm\HS256;
 use Jose\Component\Signature\JWSBuilder;
+use Jose\Component\Signature\JWSVerifier;
 use Jose\Component\Signature\Serializer\CompactSerializer;
 
 class CommunityHiveApiService implements CommunityHiveApiServiceContract
@@ -27,10 +27,18 @@ class CommunityHiveApiService implements CommunityHiveApiServiceContract
         $request = Http::baseUrl(COMMUNITY_HIVE_BASE_URL);
 
         if ($endpoint !== 'activate') {
-            $request->withToken($this->buildJwt($data));
+            $request->withBody($token = $this->buildJwt($data), 'text/plain');
+        } else {
+            $request->withBody(json_encode($data), 'application/json');
         }
 
-        $response = $request->put($endpoint, $data);
+        $response = $request->put($endpoint);
+
+        Log::debug('community_hive_api_call_request', [
+            'endpoint' => $endpoint,
+            'body' => $data,
+            'token' => $token ?? null,
+        ]);
 
         if (! $response->successful()) {
             Log::error('community_hive_api_call_error', [
@@ -40,11 +48,9 @@ class CommunityHiveApiService implements CommunityHiveApiServiceContract
             ]);
         }
 
-        Log::debug('community_hive_api_call', [
-            'endpoint' => $endpoint,
+        Log::debug('community_hive_api_call_response', [
             'status' => $response->status(),
-            'request_data' => $data,
-            'response_body' => $response->json(),
+            'body' => $response->json(),
         ]);
 
         return $response->json();
@@ -54,7 +60,7 @@ class CommunityHiveApiService implements CommunityHiveApiServiceContract
     {
         $jwk = new JWK([
             'kty' => 'oct',
-            'k' => base64_encode(get_option('community_hive_site_key', Str::random(40))),
+            'k' => base64_encode(get_option('community_hive_site_key', 'jT6qeP6fMDXyUnkk447kYaREyToxfSLE')),
         ]);
 
         $jwsCompactSerializer = new CompactSerializer();
@@ -79,5 +85,23 @@ class CommunityHiveApiService implements CommunityHiveApiServiceContract
             ->build();
 
         return $jwsCompactSerializer->serialize($jws, 0);
+    }
+
+    public function decodeJwt(string $token): array|false
+    {
+        $key = new JWK([
+            'kty' => 'oct',
+            'k' => base64_encode(get_option('community_hive_key', 'jT6qeP6fMDXyUnkk447kYaREyToxfSLE')),
+        ]);
+
+        $verifier = new JWSVerifier(new AlgorithmManager([new HS256()]));
+        $serializer = new CompactSerializer();
+
+        $data = $serializer->unserialize($token);
+        if (! $verifier->verifyWithKey($data, $key, 0)) {
+            return false;
+        }
+
+        return json_decode($data->getPayload() ?? [], true);
     }
 }
