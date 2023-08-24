@@ -20,7 +20,7 @@ rm -rf src/storage/framework/sessions/*
 rm -rf src/storage/framework/views/*
 
 ## Create the zip archive, ignoring any log files
-zip -r communityhive.zip * -x '*.log'
+zip -r $ZIP_FILE * -x '*.log'
 
 # Clean up files
 rm -r $SOURCE_DIR
