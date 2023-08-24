@@ -2,12 +2,16 @@
 
 namespace CommunityHive\App\Http\Resources;
 
+use CommunityHive\App\Models\Post;
 use CommunityHive\App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
+/**
+ * @mixin Post
+ */
 class PostResource extends JsonResource
 {
     public function toArray($request): array

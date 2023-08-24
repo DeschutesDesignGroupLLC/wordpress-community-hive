@@ -1,0 +1,10 @@
+includes:
+    - vendor/szepeviktor/phpstan-wordpress/extension.neon
+parameters:
+    bootstrapFiles:
+        - bootstrap.php
+    paths:
+        - communityhive.php
+        - src/app/
+    level: 5
+

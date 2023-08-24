@@ -6,6 +6,14 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * CommunityHive/App/Models/Post
+ *
+ * @method static Builder|Post forCommunityHive()
+ *
+ * @mixin \WP_Post
+ * @mixin \Eloquent
+ */
 class Post extends Model
 {
     /**

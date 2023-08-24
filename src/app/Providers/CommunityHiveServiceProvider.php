@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Symfony\Component\HttpFoundation\Response;
 use WP_User;
+
 use function Roots\bundle;
+use function Roots\view;
 
 class CommunityHiveServiceProvider extends ServiceProvider
 {
@@ -62,7 +64,7 @@ class CommunityHiveServiceProvider extends ServiceProvider
                 'site_member_id' => $user->ID,
                 'group_hash' => 'guest',
             ]);
-        });
+        }, 10, 3);
     }
 
     public function pluginInitiated(): void

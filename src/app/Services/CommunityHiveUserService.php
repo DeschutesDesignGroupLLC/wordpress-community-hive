@@ -51,7 +51,7 @@ class CommunityHiveUserService implements CommunityHiveUserServiceContract
     public function groupHashForUser(User $user = null): string
     {
         if ($user) {
-            $hash = array_filter($user->asWordpressUser()?->roles);
+            $hash = array_filter($user->asWordpressUser()->roles);
             natcasesort($hash);
 
             return implode(',', $hash);

@@ -48,7 +48,7 @@ class ApiController extends Controller
             $decoded = base64_decode($item);
             parse_str($decoded, $id);
 
-            if (isset($id['key1']) && $url = get_permalink($id['key1'])) {
+            if (isset($id['key1']) && $url = get_permalink((int) $id['key1'])) {
                 return redirect()->to($url);
             }
 

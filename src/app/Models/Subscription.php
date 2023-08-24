@@ -4,6 +4,13 @@ namespace CommunityHive\App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * CommunityHive/App/Models/Subscription
+ *
+ * @method static Subscription|$this create($attributes = [])
+ *
+ * @mixin \Eloquent
+ */
 class Subscription extends Model
 {
     /**
