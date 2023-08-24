@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-# Install WordPress.
+# Install WordPress
 wp core install \
+  --path="/var/www/html/wordpress" \
   --title="Wordpress Community Hive" \
   --admin_user="wordpress" \
   --admin_password="wordpress" \

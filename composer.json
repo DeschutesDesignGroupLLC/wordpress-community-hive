@@ -1,29 +1,31 @@
 {
-    "require": {
-        "php": "^8.1",
-        "roots/acorn": "^3.2",
-        "guzzlehttp/guzzle": "^7.0",
-        "web-token/jwt-framework": "^3.2",
-        "illuminate/validation": "^9.52"
-    },
-    "require-dev": {
-        "spatie/laravel-ignition": "^1.6",
-        "laravel/pint": "^v1.10.5",
-        "fzaninotto/faker": "^1.5"
-    },
-    "autoload": {
-        "psr-4": {
-            "CommunityHive\\App\\": "src/app",
-            "CommunityHive\\Database\\Factories\\": "src/database/factories/",
-            "CommunityHive\\Database\\Seeders\\": "src/database/seeders/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "src/tests/"
-        }
-    },
-    "post-autoload-dump": [
-        "Roots\\Acorn\\ComposerScripts::postAutoloadDump"
-    ]
+  "require": {
+    "php": "^8.1",
+    "roots/acorn": "^3.2",
+    "guzzlehttp/guzzle": "^7.0",
+    "web-token/jwt-framework": "^3.2"
+  },
+  "require-dev": {
+    "spatie/laravel-ignition": "^1.6",
+    "laravel/pint": "^v1.10.5",
+    "fzaninotto/faker": "^1.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "CommunityHive\\App\\": "src/app",
+      "CommunityHive\\Database\\Factories\\": "src/database/factories/",
+      "CommunityHive\\Database\\Seeders\\": "src/database/seeders/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "src/tests/"
+    }
+  },
+  "post-autoload-dump": [
+    "Roots\\Acorn\\ComposerScripts::postAutoloadDump"
+  ],
+  "scripts": {
+    "lint": "./vendor/bin/pint src"
+  }
 }

@@ -1,16 +1,30 @@
 #!/bin/bash
 
 SOURCE_DIR="src"
-ZIP_FILE="communityhive.zip"
-DEST_DIR="vendor"
+VENDOR_DIR="vendor"
+PLUGIN_FILE="communityhive.php"
+ZIP_FILE="build/communityhive.zip"
 
-# Zip the source directory
-zip -r "$ZIP_FILE" "$SOURCE_DIR" -x "*.log"
+# Move source over to build directory
+cp -r $SOURCE_DIR $VENDOR_DIR $PLUGIN_FILE build/
 
-# Zip the vendor directory
-zip -r "$ZIP_FILE" "$DEST_DIR"
+# Change to build directory
+cd build
 
-# Update the existing zip file
-zip -r "$ZIP_FILE" communityhive.php
+# Update the autoloader to PHP-Scoper
+# sed -i '' 's/\/autoload.php/\/scoper-autoload.php/g;' communityhive.php
+
+## Remove all files from the storage directories
+rm -rf src/storage/framework/cache/*
+rm -rf src/storage/framework/sessions/*
+rm -rf src/storage/framework/views/*
+
+## Create the zip archive, ignoring any log files
+zip -r communityhive.zip * -x '*.log'
+
+# Clean up files
+rm -r $SOURCE_DIR
+rm -r $VENDOR_DIR
+rm -r $PLUGIN_FILE
 
 echo "Package complete."

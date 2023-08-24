@@ -1,12 +1,13 @@
 <link href="{{ asset('app.css') }}" rel="stylesheet">
-<div class='font-montserrat my-5 mr-3 md:mr-5'>
-    <h1 class='text-xl font-bold pb-4 text-black'>{{ $title ?? 'Settings' }}</h1>
-    <div class='bg-white p-4 ring-1 ring-black ring-opacity-10 shadow-md rounded-md text-slate-600'>
+<div class='ch-font-montserrat ch-my-5 ch-mr-3 md:ch-mr-5'>
+    <h1 class='ch-text-xl ch-font-bold ch-pb-4 ch-text-black'>{{ $title ?? 'Settings' }}</h1>
+    <div class='ch-bg-white ch-p-4 ch-ring-1 ch-ring-black ch-ring-opacity-10 ch-shadow-md ch-rounded-md text-slate-600'>
         @yield('content')
-        <hr class="h-px my-4 bg-gray-200 border-0">
-        <div class='flex justify-center items-center space-x-4'>
-            <a class='hover:text-secondary' href='https://www.communityhive.com/privacy' target='_blank'>Community Hive Privacy Policy</a>
-            <a class='hover:text-secondary' href='https://www.communityhive.com/' target='_blank'>CommunityHive.com</a>
+        <hr class="ch-h-px ch-my-4 ch-bg-gray-200 ch-border-0">
+        <div class='ch-flex ch-justify-center ch-items-center ch-space-x-4'>
+            <a class='ch-text-secondary hover:ch-text-gray-500' href='https://www.communityhive.com/privacy' target='_blank'>Community Hive
+                Privacy Policy</a>
+            <a class='ch-text-secondary hover:ch-text-gray-500' href='https://www.communityhive.com/' target='_blank'>CommunityHive.com</a>
         </div>
     </div>
 </div>

@@ -96,8 +96,7 @@ class CommunityHiveServiceProvider extends ServiceProvider
                 'Community Hive',
                 'manage_options',
                 'community-hive',
-                [$this, 'renderAdminControlPanel'],
-                asset('images/icon.svg'));
+                [$this, 'renderAdminControlPanel']);
         });
     }
 

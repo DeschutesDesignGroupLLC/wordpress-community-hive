@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_roots_bud=self.webpackChunk_roots_bud||[]).push([[143],{"./resources/js/app.js":()=>{}},s=>{var e;e="./resources/js/app.js",s(s.s=e)}]);
