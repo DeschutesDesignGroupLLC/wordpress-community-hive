@@ -40,6 +40,10 @@ class CommunityHiveServiceProvider extends ServiceProvider
                 'community' => get_bloginfo('name'),
             ]);
         });
+
+        add_shortcode('community_hive_widget', function () {
+            return 'Hello, World!';
+        });
     }
 
     public function registerHooks(): void
