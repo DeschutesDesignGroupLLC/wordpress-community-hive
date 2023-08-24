@@ -44,86 +44,121 @@
             </div>
         @endif
 
-        @if (!$activated)
+        @if (!$followPageSet)
             <div class='ch-text-sm sm:ch-text-base ch-text-black ch-font-light ch-leading-6 ch-text-center'>
-                Community Hive allows your members to follow their favorite communities to receive updates.
+                Community Hive requires a Follow Us page to be setup prior to activating your community. This page is intended to be a landing
+                page when users click the 'Follow' button on Community Hive.
             </div>
 
-            <form action='{{ route('settings.index', [], false) }}' method='post'>
-                <button type="submit"
-                    class="ch-border-none ch-rounded-md ch-bg-primary hover:ch-bg-primary/90 ch-px-3.5 ch-py-2.5 ch-text-sm ch-font-semibold ch-text-white ch-shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ch-outline-primary ch-cursor-pointer">Activate
-                    Community</button>
-            </form>
-        @else
-            <div class='ch-text-sm sm:ch-text-base ch-text-black ch-font-light ch-leading-6 ch-text-center'>
-                Choose which content types should be shown in Community Hive. User roles are always used when displaying content.
+            <div class='ch-text-sm sm:ch-text-base ch-font-medium ch-text-black ch-leading-6 ch-text-center'>
+                To setup your Follow Us page, create a new page and place the following shortcode on the page. Once that is completed, click
+                Next.
             </div>
 
-            <form action='{{ route('settings.store', [], false) }}' method='post' class='form ch-w-full'>
+            <form action='{{ route('settings.store', ['setup' => true], false) }}' method='post' class='ch-w-full'>
                 <div class='ch-flex ch-flex-col ch-space-y-4'>
-                    <div class='ch-grid grid-row ch-grid-cols-1 md:ch-grid-cols-2 ch-gap-x-0 ch-gap-y-6 md:ch-gap-x-12'>
-                        <div class='ch-flex ch-flex-col ch-justify-between'>
-                            <label for="categories"
-                                class="ch-mx-auto ch-block ch-text-sm ch-font-medium ch-leading-6 ch-text-gray-900">Categories</label>
-                            <select multiple id="categories" name="categories[]"
-                                class="ch-mx-auto ch-block ch-w-full !ch-rounded-md ch-border-0 !ch-py-1.5 !ch-pl-3 !ch-text-secondary !ch-ring-1 ch-ring-inset ch-ring-gray-300 focus:ch-ring-2 focus:ch-ring-primary sm:ch-text-sm sm:ch-leading-6">
-                                @foreach ($categories as $category)
-                                    <option @selected(\in_array($category->term_taxonomy_id, explode(',', get_option('community_hive_categories')))) value='{{ $category->term_taxonomy_id }}'>{{ $category->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class='ch-flex ch-flex-col ch-justify-between'>
-                            <label for="tags"
-                                class="ch-mx-auto ch-block ch-text-sm ch-font-medium ch-leading-6 ch-text-gray-900">Tags</label>
-                            <select multiple id="tags" name="tags[]"
-                                class="ch-mx-auto ch-block ch-w-full !ch-rounded-md ch-border-0 !ch-py-1.5 !ch-pl-3 !ch-text-secondary !ch-ring-1 ch-ring-inset ch-ring-gray-300 focus:ch-ring-2 focus:ch-ring-primary sm:ch-text-sm sm:ch-leading-6">
-                                @foreach ($tags as $tag)
-                                    <option @selected(\in_array($tag->term_taxonomy_id, explode(',', get_option('community_hive_tags')))) value='{{ $tag->term_taxonomy_id }}'>{{ $tag->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class='ch-flex ch-flex-col ch-justify-between'>
-                            <label for="login" class="ch-mx-auto ch-block ch-text-sm ch-font-medium ch-leading-6 ch-text-gray-900">Login
-                                Page</label>
-                            <select id="login" name="login"
-                                class="ch-mx-auto ch-block ch-w-full !ch-rounded-md ch-border-0 !ch-py-1.5 !ch-pl-3 !ch-text-secondary !ch-ring-1 ch-ring-inset ch-ring-gray-300 focus:ch-ring-2 focus:ch-ring-primary sm:ch-text-sm sm:ch-leading-6">
-                                <option value=''>Use Default Login Page</option>
-                                <option @selected(get_option('community_hive_login_page') === 'disabled') value='disabled'>Disable Login Link</option>
-                                @foreach ($pages as $page)
-                                    <option @selected(get_option('community_hive_login_page') === (string) $page->ID) value='{{ $page->ID }}'>{{ $page->post_title }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class='ch-flex ch-flex-col ch-justify-between'>
-                            <label for="registration"
-                                class="ch-mx-auto ch-block ch-text-sm ch-font-medium ch-leading-6 ch-text-gray-900">Registration Page</label>
-                            <select id="registration" name="registration"
-                                class="ch-mx-auto ch-block ch-w-full !ch-rounded-md ch-border-0 !ch-py-1.5 !ch-pl-3 !ch-text-secondary !ch-ring-1 ch-ring-inset ch-ring-gray-300 focus:ch-ring-2 focus:ch-ring-primary sm:ch-text-sm sm:ch-leading-6">
-                                <option value=''>Use Default Registration Page</option>
-                                <option @selected(get_option('community_hive_registration_page') === 'disabled') value='disabled'>Disable Registration Link</option>
-                                @foreach ($pages as $page)
-                                    <option @selected(get_option('community_hive_registration_page') === (string) $page->ID) value='{{ $page->ID }}'>{{ $page->post_title }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class='ch-flex ch-flex-col ch-justify-between'>
-                            <label for="follow" class="ch-mx-auto ch-block ch-text-sm ch-font-medium ch-leading-6 ch-text-gray-900">Follow
-                                Page</label>
-                            <select id="follow" name="follow"
-                                class="ch-mx-auto ch-block ch-w-full !ch-rounded-md ch-border-0 !ch-py-1.5 !ch-pl-3 !ch-text-secondary !ch-ring-1 ch-ring-inset ch-ring-gray-300 focus:ch-ring-2 focus:ch-ring-primary sm:ch-text-sm sm:ch-leading-6">
-                                @foreach ($pages as $page)
-                                    <option @selected(get_option('community_hive_follow_page') === (string) $page->ID) value='{{ $page->ID }}'>{{ $page->post_title }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                    <div class='ch-flex ch-flex-row ch-space-x-2 ch-items-center ch-justify-center'>
+                        <div class='ch-font-semibold'>Shortcode:</div>
+                        <code class='ch-text-center'>[community_hive_follow]</code>
+                    </div>
+                    <div class='ch-flex ch-flex-col ch-justify-between'>
+                        <label for="follow" class="ch-mx-auto ch-block ch-text-sm ch-font-medium ch-leading-6 ch-text-gray-900">Follow
+                            Page</label>
+                        <select id="follow" name="follow"
+                            class="ch-mx-auto ch-block ch-w-full !ch-rounded-md ch-border-0 !ch-py-1.5 !ch-pl-3 !ch-text-secondary !ch-ring-1 ch-ring-inset ch-ring-gray-300 focus:ch-ring-2 focus:ch-ring-primary sm:ch-text-sm sm:ch-leading-6">
+                            @foreach ($pages as $page)
+                                <option @selected(get_option('community_hive_follow_page') === (string) $page->ID) value='{{ $page->ID }}'>{{ $page->post_title }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
+
                 <button type="submit"
-                    class="ch-border-none ch-w-full ch-mt-8 ch-rounded-md ch-bg-primary hover:ch-bg-primary/90 ch-px-3.5 ch-py-2.5 ch-text-sm ch-font-semibold ch-text-white ch-shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ch-outline-primary ch-cursor-pointer">Save
-                    Settings</button>
+                    class="ch-border-none ch-w-full ch-mt-8 ch-rounded-md ch-bg-primary hover:ch-bg-primary/90 ch-px-3.5 ch-py-2.5 ch-text-sm ch-font-semibold ch-text-white ch-shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ch-outline-primary ch-cursor-pointer">Next</button>
             </form>
+        @else
+            @if (!$activated)
+                <div class='ch-text-sm sm:ch-text-base ch-text-black ch-font-light ch-leading-6 ch-text-center'>
+                    Community Hive allows your members to follow their favorite communities to receive updates.
+                </div>
+
+                <form action='{{ route('settings.index', [], false) }}' method='post' class='ch-w-full'>
+                    <button type="submit"
+                        class="ch-w-full ch-border-none ch-rounded-md ch-bg-primary hover:ch-bg-primary/90 ch-px-3.5 ch-py-2.5 ch-text-sm ch-font-semibold ch-text-white ch-shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ch-outline-primary ch-cursor-pointer">Activate
+                        Community</button>
+                </form>
+            @else
+                <div class='ch-text-sm sm:ch-text-base ch-text-black ch-font-light ch-leading-6 ch-text-center'>
+                    Choose which content types should be shown in Community Hive. User roles are always used when displaying content.
+                </div>
+
+                <form action='{{ route('settings.store', [], false) }}' method='post' class='ch-w-full'>
+                    <div class='ch-flex ch-flex-col ch-space-y-4'>
+                        <div class='ch-grid grid-row ch-grid-cols-1 md:ch-grid-cols-2 ch-gap-x-0 ch-gap-y-6 md:ch-gap-x-12'>
+                            <div class='ch-flex ch-flex-col ch-justify-between'>
+                                <label for="categories"
+                                    class="ch-mx-auto ch-block ch-text-sm ch-font-medium ch-leading-6 ch-text-gray-900">Categories</label>
+                                <select multiple id="categories" name="categories[]"
+                                    class="ch-mx-auto ch-block ch-w-full !ch-rounded-md ch-border-0 !ch-py-1.5 !ch-pl-3 !ch-text-secondary !ch-ring-1 ch-ring-inset ch-ring-gray-300 focus:ch-ring-2 focus:ch-ring-primary sm:ch-text-sm sm:ch-leading-6">
+                                    @foreach ($categories as $category)
+                                        <option @selected(\in_array($category->term_taxonomy_id, explode(',', get_option('community_hive_categories')))) value='{{ $category->term_taxonomy_id }}'>{{ $category->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class='ch-flex ch-flex-col ch-justify-between'>
+                                <label for="tags"
+                                    class="ch-mx-auto ch-block ch-text-sm ch-font-medium ch-leading-6 ch-text-gray-900">Tags</label>
+                                <select multiple id="tags" name="tags[]"
+                                    class="ch-mx-auto ch-block ch-w-full !ch-rounded-md ch-border-0 !ch-py-1.5 !ch-pl-3 !ch-text-secondary !ch-ring-1 ch-ring-inset ch-ring-gray-300 focus:ch-ring-2 focus:ch-ring-primary sm:ch-text-sm sm:ch-leading-6">
+                                    @foreach ($tags as $tag)
+                                        <option @selected(\in_array($tag->term_taxonomy_id, explode(',', get_option('community_hive_tags')))) value='{{ $tag->term_taxonomy_id }}'>{{ $tag->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class='ch-flex ch-flex-col ch-justify-between'>
+                                <label for="login" class="ch-mx-auto ch-block ch-text-sm ch-font-medium ch-leading-6 ch-text-gray-900">Login
+                                    Page</label>
+                                <select id="login" name="login"
+                                    class="ch-mx-auto ch-block ch-w-full !ch-rounded-md ch-border-0 !ch-py-1.5 !ch-pl-3 !ch-text-secondary !ch-ring-1 ch-ring-inset ch-ring-gray-300 focus:ch-ring-2 focus:ch-ring-primary sm:ch-text-sm sm:ch-leading-6">
+                                    <option value=''>Use Default Login Page</option>
+                                    <option @selected(get_option('community_hive_login_page') === 'disabled') value='disabled'>Disable Login Link</option>
+                                    @foreach ($pages as $page)
+                                        <option @selected(get_option('community_hive_login_page') === (string) $page->ID) value='{{ $page->ID }}'>{{ $page->post_title }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class='ch-flex ch-flex-col ch-justify-between'>
+                                <label for="registration"
+                                    class="ch-mx-auto ch-block ch-text-sm ch-font-medium ch-leading-6 ch-text-gray-900">Registration
+                                    Page</label>
+                                <select id="registration" name="registration"
+                                    class="ch-mx-auto ch-block ch-w-full !ch-rounded-md ch-border-0 !ch-py-1.5 !ch-pl-3 !ch-text-secondary !ch-ring-1 ch-ring-inset ch-ring-gray-300 focus:ch-ring-2 focus:ch-ring-primary sm:ch-text-sm sm:ch-leading-6">
+                                    <option value=''>Use Default Registration Page</option>
+                                    <option @selected(get_option('community_hive_registration_page') === 'disabled') value='disabled'>Disable Registration Link</option>
+                                    @foreach ($pages as $page)
+                                        <option @selected(get_option('community_hive_registration_page') === (string) $page->ID) value='{{ $page->ID }}'>{{ $page->post_title }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class='ch-flex ch-flex-col ch-justify-between'>
+                                <label for="follow" class="ch-mx-auto ch-block ch-text-sm ch-font-medium ch-leading-6 ch-text-gray-900">Follow
+                                    Page</label>
+                                <select id="follow" name="follow"
+                                    class="ch-mx-auto ch-block ch-w-full !ch-rounded-md ch-border-0 !ch-py-1.5 !ch-pl-3 !ch-text-secondary !ch-ring-1 ch-ring-inset ch-ring-gray-300 focus:ch-ring-2 focus:ch-ring-primary sm:ch-text-sm sm:ch-leading-6">
+                                    @foreach ($pages as $page)
+                                        <option @selected(get_option('community_hive_follow_page') === (string) $page->ID) value='{{ $page->ID }}'>{{ $page->post_title }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit"
+                        class="ch-border-none ch-w-full ch-mt-8 ch-rounded-md ch-bg-primary hover:ch-bg-primary/90 ch-px-3.5 ch-py-2.5 ch-text-sm ch-font-semibold ch-text-white ch-shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ch-outline-primary ch-cursor-pointer">Save
+                        Settings</button>
+                </form>
+            @endif
         @endif
     </div>
 @endsection

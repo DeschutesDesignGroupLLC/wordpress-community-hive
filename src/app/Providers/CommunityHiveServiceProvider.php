@@ -86,6 +86,9 @@ class CommunityHiveServiceProvider extends ServiceProvider
         delete_option('community_hive_site_id');
         delete_option('community_hive_categories');
         delete_option('community_hive_tags');
+        delete_option('community_hive_login_page');
+        delete_option('community_hive_registration_page');
+        delete_option('community_hive_follow_page');
     }
 
     public function buildAdminControlPanel(): void
@@ -103,6 +106,7 @@ class CommunityHiveServiceProvider extends ServiceProvider
     public function renderAdminControlPanel(): Response
     {
         return response()->view('admin.settings', [
+            'followPageSet' => get_option('community_hive_follow_page'),
             'activated' => get_option('community_hive_site_key') && get_option('community_hive_site_id'),
             'categories' => get_categories(['hide_empty' => false]),
             'tags' => get_tags(['hide_empty' => false]),

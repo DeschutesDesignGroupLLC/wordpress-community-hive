@@ -57,6 +57,12 @@ class SettingsController
 
     public function store(): RedirectResponse
     {
+        if (request()->input('setup')) {
+            update_option('community_hive_follow_page', request()->input('follow'));
+
+            return redirect()->back();
+        }
+
         update_option('community_hive_categories', implode(',', request()->input('categories', [])));
         update_option('community_hive_tags', implode(',', request()->input('tags', [])));
         update_option('community_hive_login_page', request()->input('login'));
