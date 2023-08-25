@@ -41,10 +41,6 @@ class CommunityHiveServiceProvider extends ServiceProvider
                 'community' => get_bloginfo('name'),
             ]);
         });
-
-        add_shortcode('community_hive_widget', function () {
-            return 'Hello, World!';
-        });
     }
 
     public function registerHooks(): void
@@ -53,6 +49,7 @@ class CommunityHiveServiceProvider extends ServiceProvider
         register_uninstall_hook(Config::get('COMMUNITY_HIVE_PLUGIN_FILE'), [CommunityHiveServiceProvider::class, 'uninstallRoutine']);
 
         add_action('init', [$this, 'pluginInitiated']);
+        add_action('init', [$this, 'registerBlocks']);
 
         add_action('set_user_role', function ($id) {
             $userService = $this->app->make(CommunityHiveUserService::class);
@@ -75,6 +72,11 @@ class CommunityHiveServiceProvider extends ServiceProvider
     public function pluginInitiated(): void
     {
         //
+    }
+
+    public function registerBlocks(): void
+    {
+        register_block_type(dirname(Config::get('COMMUNITY_HIVE_PLUGIN_FILE')));
     }
 
     public function activationRoutine(): void

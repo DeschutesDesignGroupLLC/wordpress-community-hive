@@ -1,10 +1,10 @@
 {
   "require": {
     "php": "^8.1",
-    "roots/acorn": "^3.2",
     "guzzlehttp/guzzle": "^7.0",
-    "web-token/jwt-framework": "^3.2",
-    "roots/wp-config": "^1.0"
+    "roots/acorn": "^3.2",
+    "roots/wp-config": "^1.0",
+    "web-token/jwt-framework": "^3.2"
   },
   "require-dev": {
     "spatie/laravel-ignition": "^1.6",

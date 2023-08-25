@@ -22,5 +22,6 @@ wordpress
 # Build
 src/public
 dist
+block
 build
 tools

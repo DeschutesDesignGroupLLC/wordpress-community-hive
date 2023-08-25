@@ -1,6 +1,7 @@
 {
   "preset": "laravel",
   "excludes": [
+    "block",
     "build",
     "dist",
     "docker",

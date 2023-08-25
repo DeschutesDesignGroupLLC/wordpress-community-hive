@@ -6,6 +6,8 @@ services:
     volumes:
       - './wordpress:/var/www/html'
       - './communityhive.php:/var/www/html/wp-content/plugins/communityhive/communityhive.php'
+      - './block.json:/var/www/html/wp-content/plugins/communityhive/block.json'
+      - './block:/var/www/html/wp-content/plugins/communityhive/block'
       - './src:/var/www/html/wp-content/plugins/communityhive/src'
       - './vendor:/var/www/html/wp-content/plugins/communityhive/vendor'
       - './nginx/conf.d/site.conf:/etc/nginx/conf.d/site.conf'
@@ -41,6 +43,8 @@ services:
     volumes:
       - './wordpress:/var/www/html'
       - './communityhive.php:/var/www/html/wp-content/plugins/communityhive/communityhive.php'
+      - './block.json:/var/www/html/wp-content/plugins/communityhive/block.json'
+      - './block:/var/www/html/wp-content/plugins/communityhive/block'
       - './src:/var/www/html/wp-content/plugins/communityhive/src'
       - './vendor:/var/www/html/wp-content/plugins/communityhive/vendor'
       - './php/conf.d/php.ini:/usr/local/etc/php/conf.d/php.ini'
@@ -71,6 +75,8 @@ services:
     volumes:
       - './wordpress:/var/www/html'
       - './communityhive.php:/var/www/html/wp-content/plugins/communityhive/communityhive.php'
+      - './block.json:/var/www/html/wp-content/plugins/communityhive/block.json'
+      - './block:/var/www/html/wp-content/plugins/communityhive/block'
       - './src:/var/www/html/wp-content/plugins/communityhive/src'
       - './vendor:/var/www/html/wp-content/plugins/communityhive/vendor'
     environment:

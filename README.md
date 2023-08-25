@@ -30,12 +30,20 @@ docker-compose run --rm cli install-wordpress
 Username: wordpress<br>
 Password: wordpress
 
-### Building for Production
+### Building App for Production
 
 Compile your assets for production with the command:
 
 ```bash
 npm run build
+```
+
+### Building Block for Production
+
+Compile your Gutenberg block for production.
+
+```bash
+npm run build:block
 ```
 
 ## Command-Line Interface (CLI)
@@ -66,7 +74,7 @@ Any environment variable files by default will be excluded from your package. Ma
 
 WordPress plugins sometimes encounter dependency namespace issues. To tackle this, it's advisable to prefix dependency namespaces with your own.
 
-**Note:** Do not forget to compile your assets for production.
+**Note:** Do not forget to compile your [assets](#building-app-for-production) and [blocks](#building-block-for-production) for production.
 
 Use PHP-Scoper for this task. Install PHP-Scoper PHAR via Phive:
 
