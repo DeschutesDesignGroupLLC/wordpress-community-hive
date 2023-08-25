@@ -1,16 +1,14 @@
 <?php
 
-use Roots\Acorn\Bootloader;
+global $wpdb;
+$wpdb = new \wpdb( '', '', '', '' );
 
-\define('ACORN_BASEPATH', __DIR__ . '/src');
 \define('WP_DEBUG_DISPLAY', true);
 \define('DB_HOST', 'mysql');
 \define('DB_NAME', 'wordpress');
 \define('DB_USER', 'wordpress');
 \define('DB_PASSWORD', 'wordpress');
-\define('WP_CONTENT_DIR', '');
+\define('DB_CHARSET', 'utf8');
+\define('WP_CONTENT_DIR', __DIR__.'/wordpress/wp-content');
 
-require_once __DIR__ . '/vendor/autoload.php';
-
-$instance = Bootloader::getInstance();
-$instance->boot();
+require_once __DIR__ . '/communityhive.php';
