@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Roots\WPConfig\Config;
 use Symfony\Component\HttpFoundation\Response;
 use WP_User;
 
@@ -34,7 +35,7 @@ class CommunityHiveServiceProvider extends ServiceProvider
         add_shortcode('community_hive_follow', function () {
             bundle('shortcode')->enqueueCss();
 
-            return view('shortcodes.follow', [
+            return view('shortcode.follow', [
                 'loggedIn' => is_user_logged_in(),
                 'user' => wp_get_current_user(),
                 'community' => get_bloginfo('name'),
@@ -44,10 +45,11 @@ class CommunityHiveServiceProvider extends ServiceProvider
 
     public function registerHooks(): void
     {
-        register_activation_hook(COMMUNITY_HIVE_PLUGIN_FILE, [$this, 'activationRoutine']);
-        register_uninstall_hook(COMMUNITY_HIVE_PLUGIN_FILE, [CommunityHiveServiceProvider::class, 'uninstallRoutine']);
+        register_activation_hook(Config::get('COMMUNITY_HIVE_PLUGIN_FILE'), [$this, 'activationRoutine']);
+        register_uninstall_hook(Config::get('COMMUNITY_HIVE_PLUGIN_FILE'), [CommunityHiveServiceProvider::class, 'uninstallRoutine']);
 
         add_action('init', [$this, 'pluginInitiated']);
+        add_action('init', [$this, 'registerBlocks']);
 
         add_action('set_user_role', function ($id) {
             $userService = $this->app->make(CommunityHiveUserService::class);
@@ -70,6 +72,11 @@ class CommunityHiveServiceProvider extends ServiceProvider
     public function pluginInitiated(): void
     {
         //
+    }
+
+    public function registerBlocks(): void
+    {
+        register_block_type(plugin_dir_path(Config::get('COMMUNITY_HIVE_PLUGIN_FILE')).'src/blocks/follow');
     }
 
     public function activationRoutine(): void

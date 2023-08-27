@@ -1,5 +1,4 @@
 import defaultTheme from 'tailwindcss/defaultTheme.js'
-import forms from '@tailwindcss/forms'
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -10,6 +9,12 @@ export default {
       colors: {
         primary: '#2A9C66',
         secondary: '#18203D'
+      },
+      fontSize: {
+        sm: 'var(--wp--preset--font-size--small, 0.875rem)',
+        base: 'var(--wp--preset--font-size--medium, 1rem)',
+        lg: 'var(--wp--preset--font-size--large, 1.125rem)',
+        xl: 'var(--wp--preset--font-size--x-large, 1.25rem)'
       }
     },
     fontFamily: {
@@ -18,7 +23,5 @@ export default {
   },
   corePlugins: {
     preflight: false
-  },
-  plugins: [forms],
-  safelist: ['md:ch-grid-cols-1', 'md:ch-grid-cols-2', 'md:ch-grid-cols-3']
+  }
 }

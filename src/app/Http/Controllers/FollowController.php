@@ -10,29 +10,35 @@ use Illuminate\Support\Facades\Cache;
 
 class FollowController
 {
-    public function index($action, CommunityHiveApiServiceContract $apiService): RedirectResponse
+    public function index(CommunityHiveApiServiceContract $apiService, $action = null): RedirectResponse
     {
-        switch ($action) {
-            case 'register':
-                $register = get_option('community_hive_registration_page');
+        if ($action) {
+            switch ($action) {
+                case 'register':
+                    $register = get_option('community_hive_registration_page');
 
-                return redirect()->to($register !== '' ? get_permalink($register) : wp_registration_url());
+                    return redirect()->to($register !== '' ? get_permalink($register) : wp_registration_url());
 
-            case 'login':
-                $login = get_option('community_hive_login_page');
+                case 'login':
+                    $login = get_option('community_hive_login_page');
 
-                return redirect()->to($login !== '' ? get_permalink($login) : wp_login_url());
+                    return redirect()->to($login !== '' ? get_permalink($login) : wp_login_url());
 
-            case 'follow':
-                $response = $apiService->callApi('subscribe', [
-                    'site_member_id' => 0,
-                    'group_hash' => 'guest',
-                    'member_email' => false,
-                ]);
+                case 'follow':
+                    $response = $apiService->callApi('subscribe', [
+                        'site_member_id' => 0,
+                        'group_hash' => 'guest',
+                        'member_email' => false,
+                    ]);
 
-                if (isset($response['redirect_url'])) {
-                    return redirect()->to($response['redirect_url']);
-                }
+                    if (isset($response['redirect_url'])) {
+                        return redirect()->to($response['redirect_url']);
+                    }
+            }
+        }
+
+        if ($follow = get_option('community_hive_follow_page')) {
+            return redirect()->to(get_permalink($follow));
         }
 
         return redirect()->to(site_url());

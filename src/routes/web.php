@@ -13,6 +13,6 @@ Route::group(['prefix' => 'community-hive'], function () {
         Route::post('settings', [SettingsController::class, 'store'])->name('settings.store');
     });
 
-    Route::get('follow/{action}', [FollowController::class, 'index'])->name('follow.index');
+    Route::get('follow/{action?}', [FollowController::class, 'index'])->name('follow.index');
     Route::post('follow', [FollowController::class, 'store'])->middleware(AuthenticateUser::class)->name('follow.store');
 });

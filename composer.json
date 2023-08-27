@@ -1,8 +1,9 @@
 {
   "require": {
     "php": "^8.1",
-    "roots/acorn": "^3.2",
     "guzzlehttp/guzzle": "^7.0",
+    "roots/acorn": "^3.2",
+    "roots/wp-config": "^1.0",
     "web-token/jwt-framework": "^3.2"
   },
   "require-dev": {
@@ -31,5 +32,11 @@
     "prefix": "php -d memory_limit=-1 ./tools/php-scoper add-prefix",
     "test:lint": "./vendor/bin/pint src --test",
     "test:types": "APP_RUNNING_IN_CONSOLE=false ./vendor/bin/phpstan analyse --memory-limit 1G"
+  },
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "composer/installers": true
+    }
   }
 }

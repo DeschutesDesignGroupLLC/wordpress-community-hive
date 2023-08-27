@@ -4,9 +4,9 @@ import { consola } from 'consola'
 const hostname = 'communityhive.lvh.me'
 const port = 3000
 
-const server = http
+http
   .createServer((req, res) => {
-    const { headers, httpVersion, method, url } = req
+    const { method, url } = req
 
     let body = []
     req

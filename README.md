@@ -30,12 +30,20 @@ docker-compose run --rm cli install-wordpress
 Username: wordpress<br>
 Password: wordpress
 
-### Building for Production
+### Building App for Production
 
 Compile your assets for production with the command:
 
 ```bash
 npm run build
+```
+
+### Building Blocks for Production
+
+Compile your blocks for production with the command:
+
+```bash
+npm run build:blocks
 ```
 
 ## Command-Line Interface (CLI)
@@ -56,11 +64,17 @@ The Acorns package includes several Laravel Artisan commands. You can find a cur
 docker-compose run --rm cli wp acorn [artisan:command]
 ```
 
+## Environment Variables
+
+You can load and set environment variables using a `.env` file located in the `src` directory. Rename `.env.example` to `.env` to get started. The file will be automatically loaded by the application.
+
+Any environment variable files by default will be excluded from your package. Make sure to set default values or modify `scripts/package.sh` to include `*.env` files when packaging.
+
 ## Preparing the Plugin for Distribution
 
 WordPress plugins sometimes encounter dependency namespace issues. To tackle this, it's advisable to prefix dependency namespaces with your own.
 
-**Note:** Do not forget to compile your assets for production.
+**Note:** Do not forget to compile your [assets](#building-app-for-production) and [blocks](#building-blocks-for-production) for production.
 
 Use PHP-Scoper for this task. Install PHP-Scoper PHAR via Phive:
 

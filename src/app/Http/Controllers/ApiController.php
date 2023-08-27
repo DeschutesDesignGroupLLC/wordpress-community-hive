@@ -57,8 +57,8 @@ class ApiController extends Controller
             ]);
         }
 
-        if (request()->input('follow') === '1' && $follow = get_option('community_hive_follow_page')) {
-            return redirect()->to(get_permalink($follow));
+        if (request()->input('follow') === '1') {
+            return redirect()->route('follow.index');
         }
 
         return redirect()->to(site_url());

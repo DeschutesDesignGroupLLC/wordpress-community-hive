@@ -2,12 +2,13 @@
 export default async (bud) => {
   bud
     .entry({
-      app: ['@resources/js/app.js'],
+      admin: ['@resources/js/admin.js'],
+      block: ['@resources/js/block.js'],
       shortcode: ['@resources/js/shortcode.js']
     })
     .setPath('@resources', '@src/resources/')
     .setPath('@dist', '@src/public/')
-    .watch(bud.path(`@src/resources/**/*`))
+    .watch(bud.path(`@resources/**/*`))
     .assets({
       from: 'src/resources/images',
       to: 'images',

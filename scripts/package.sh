@@ -11,16 +11,16 @@ if [ -f "./build/$ZIP_FILE" ]; then
 fi
 
 # Move source over to build directory
-if [ ! -f "./build/$PLUGIN_FILE" ]; then
-  cp -r $PLUGIN_FILE build/
-fi
-
 if [ ! -d "./build/$SOURCE_DIR" ]; then
   cp -r $SOURCE_DIR build/
 fi
 
 if [ ! -d "./build/$VENDOR_DIR" ]; then
   cp -r $VENDOR_DIR build/
+fi
+
+if [ ! -f "./build/$PLUGIN_FILE" ]; then
+  cp -r $PLUGIN_FILE build/
 fi
 
 if [ ! -f "./build/composer.json" ]; then
@@ -33,13 +33,13 @@ cd build
 # Update the autoloader to PHP-Scoper
 # sed -i '' 's/\/autoload.php/\/scoper-autoload.php/g;' communityhive.php
 
-## Remove all files from the storage directories
+# Remove all files from the storage directories
 rm -rf src/storage/framework/cache/*
 rm -rf src/storage/framework/sessions/*
 rm -rf src/storage/framework/views/*
 
-## Create the zip archive, ignoring any log files
-zip -r $ZIP_FILE * -x '*.log'
+# Create the zip archive, ignoring any log files or env variables
+zip -r $ZIP_FILE * -x '*.log' '*.env'
 
 # Clean up files
 rm -r $SOURCE_DIR
