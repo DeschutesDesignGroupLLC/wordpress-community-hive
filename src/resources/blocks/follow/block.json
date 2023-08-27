@@ -1,0 +1,10 @@
+{
+  "apiVersion": 3,
+  "title": "Community Hive",
+  "description": "A simple block to encourage website viewers to follow you on Community Hive.",
+  "name": "community-hive/follow",
+  "category": "widgets",
+  "icon": "networking",
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

@@ -76,13 +76,7 @@ class CommunityHiveServiceProvider extends ServiceProvider
 
     public function registerBlocks(): void
     {
-        register_block_type('community-hive/follow', [
-            'render_callback' => function () {
-                bundle('block')->enqueueCss();
-
-                return view('block.follow.index')->render();
-            },
-        ]);
+        register_block_type(plugin_dir_path(Config::get('COMMUNITY_HIVE_PLUGIN_FILE')).'src/blocks/follow');
     }
 
     public function activationRoutine(): void

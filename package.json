@@ -18,6 +18,7 @@
   "scripts": {
     "dev": "bud development",
     "build": "bud build",
+    "build:blocks": "wp-scripts build --webpack-src-dir=./src/resources/blocks --output-path=./src/blocks",
     "lint": "ESLINT_USE_FLAT_CONFIG=false eslint --fix 'src/resources/**/*.js' './*.js'",
     "format": "prettier 'src/resources/**/*.{blade.php,js,json}' './*.{js,json}' --write --config ./.prettierrc",
     "test:format": "prettier 'src/resources/**/*.{blade.php,js,json}' './*.{js,json}' --check --config ./.prettierrc",
@@ -32,6 +33,7 @@
     "@roots/eslint-config": "^6.14.3",
     "@shufo/prettier-plugin-blade": "^1.11.0",
     "@tailwindcss/forms": "^0.5.4",
+    "@wordpress/scripts": "^26.11.0",
     "consola": "^3.2.3",
     "prettier": "^3.0.2",
     "tailwindcss": "^3.3.3"

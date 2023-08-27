@@ -20,6 +20,7 @@ wordpress
 .phive
 
 # Build
+src/blocks
 src/public
 dist
 build

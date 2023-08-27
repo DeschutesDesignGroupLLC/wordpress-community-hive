@@ -74,17 +74,17 @@
                 </div>
 
                 <button type="submit"
-                    class="ch-border-none ch-w-full ch-mt-8 ch-rounded-md ch-bg-primary hover:ch-bg-primary/90 ch-px-3.5 ch-py-2.5 ch-text-sm ch-font-semibold ch-text-white ch-shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ch-outline-primary ch-cursor-pointer">Next</button>
+                    class="ch-text-base ch-border-none ch-w-full ch-mt-8 ch-rounded-md ch-bg-primary hover:ch-bg-primary/90 ch-px-3.5 ch-py-2.5 ch-text-sm ch-font-semibold ch-text-white ch-shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ch-outline-primary ch-cursor-pointer">Next</button>
             </form>
         @else
-            @if ($activated)
+            @if (!$activated)
                 <div class='ch-text-sm sm:ch-text-base ch-text-black ch-font-light ch-leading-6 ch-text-center'>
                     Community Hive allows your members to follow their favorite communities to receive updates.
                 </div>
 
                 <form action='{{ route('settings.index', [], false) }}' method='post' class='ch-w-full'>
                     <button type="submit"
-                        class="ch-w-full ch-border-none ch-rounded-md ch-bg-primary hover:ch-bg-primary/90 ch-px-3.5 ch-py-2.5 ch-text-sm ch-font-semibold ch-text-white ch-shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ch-outline-primary ch-cursor-pointer">Activate
+                        class="ch-text-base ch-w-full ch-border-none ch-rounded-md ch-bg-primary hover:ch-bg-primary/90 ch-px-3.5 ch-py-2.5 ch-text-sm ch-font-semibold ch-text-white ch-shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ch-outline-primary ch-cursor-pointer">Activate
                         Community</button>
                 </form>
             @else
@@ -155,7 +155,7 @@
                         </div>
                     </div>
                     <button type="submit"
-                        class="ch-border-none ch-w-full ch-mt-8 ch-rounded-md ch-bg-primary hover:ch-bg-primary/90 ch-px-3.5 ch-py-2.5 ch-text-sm ch-font-semibold ch-text-white ch-shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ch-outline-primary ch-cursor-pointer">Save
+                        class="ch-text-base ch-border-none ch-w-full ch-mt-8 ch-rounded-md ch-bg-primary hover:ch-bg-primary/90 ch-px-3.5 ch-py-2.5 ch-text-sm ch-font-semibold ch-text-white ch-shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ch-outline-primary ch-cursor-pointer">Save
                         Settings</button>
                 </form>
             @endif

@@ -1,4 +1,4 @@
-<div class='ch-font-montserrat ch-flex ch-flex-col ch-space-y-4 ch-items-center ch-py-8 ch-px-4'>
+<div class='ch-font-montserrat ch-flex ch-flex-col ch-space-y-4 ch-items-center'>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 341.7 64" class='ch-w-3/4'>
         <path fill="#2a9c66"
             d="M0 32.2C-.1 14.5 14.2.1 31.9.1h22.2v25.8H42V3.6h-6.4c-.7 0-1.4.2-2 .4h.1c-2.2.9-3.7 3.1-3.7 5.6v44.9c0 3.3 2.7 6 6 6h6.1V38.2h12.1V64H32.3C14.7 63.9.1 49.9 0 32.2Z">
@@ -12,6 +12,6 @@
     <div class='ch-text-sm ch-text-center'>Community Hive allows you to follow your favorite communities all in one place.</div>
 
     <a href='{{ route('follow.index') }}'
-        class="ch-no-underline hover:ch-no-underline ch-text-center ch-mt-4 ch-rounded-md ch-bg-primary hover:ch-bg-primary/90 ch-px-3.5 ch-py-2.5 ch-font-medium hover:ch-text-white !ch-text-white ch-shadow-sm focus:ch-outline-none focus:ch-text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ch-outline-primary">Follow
+        class="ch-text-sm ch-no-underline hover:ch-no-underline ch-text-center ch-mt-4 ch-rounded-md ch-bg-primary hover:ch-bg-primary/90 ch-px-3.5 ch-py-2.5 ch-font-medium hover:ch-text-white !ch-text-white ch-shadow-sm focus:ch-outline-none focus:ch-text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ch-outline-primary">Follow
         On Community Hive</a>
 </div>

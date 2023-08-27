@@ -9,9 +9,10 @@
         </path>
     </svg>
 
-    <div class='h1 ch-font-bold ch-text-4xl ch-text-secondary ch-pt-4 ch-text-center'>Follow {{ $community }}</div>
+    <div class='h1 ch-font-bold ch-text-lg ch-text-secondary ch-pt-4 ch-text-center'>Follow {{ $community }}</div>
 
-    <div class='ch-text-center ch-font-semibold'>Community Hive allows you to follow your favorite communities to receive updates via email
+    <div class='ch-text-base ch-text-center ch-font-semibold'>Community Hive allows you to follow your favorite communities to receive
+        updates via email
         and push notifications.</div>
 
     @if (Cache::has('error'))
@@ -23,14 +24,14 @@
                         clip-rule="evenodd" />
                 </svg>
                 <div class="ch-ml-3">
-                    <h3 class="ch-text-sm ch-font-medium ch-text-red-800 ch-my-0">{{ Cache::pull('error') }}</h3>
+                    <h3 class="ch-text-sm ch-font-medium !ch-text-red-800 ch-my-0">{{ Cache::pull('error') }}</h3>
                 </div>
             </div>
         </div>
     @endif
 
     @if ($loggedIn)
-        <div class='ch-text-center'>Following on Community Hive will share the email address entered with <a
+        <div class='ch-text-sm ch-text-center'>Following on Community Hive will share the email address entered with <a
                 href='https://communityhive.com' target='_blank'>communityhive.com</a>.</div>
 
         <form action='{{ route('follow.store') }}' method='post' class='ch-w-full ch-text-center ch-max-w-4xl'>
@@ -38,7 +39,7 @@
                 class="ch-mx-auto ch-w-3/4 ch-text-center ch-block ch-rounded-md ch-border-0 ch-ring-1 ch-ring-inset ch-ring-gray-300 ch-py-1.5 ch-text-secondary ch-shadow-sm placeholder:text-secondary focus:ch-ring-2 focus:ch-ring-inset focus:ch-ring-primary sm:ch-text-sm sm:ch-leading-6"
                 placeholder="you@example.com">
             <button type="submit"
-                class="ch-w-full ch-max-w-full ch-mt-4 ch-rounded-md ch-border-0 ch-bg-primary hover:ch-bg-primary/90 ch-px-3.5 ch-py-2.5 ch-font-medium ch-text-white ch-shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ch-outline-primary focus:ch-bg-primary ch-cursor-pointer">Follow</button>
+                class="ch-text-sm ch-w-full ch-max-w-full ch-mt-4 ch-rounded-md ch-border-0 ch-bg-primary hover:ch-bg-primary/90 ch-px-3.5 ch-py-2.5 ch-font-medium ch-text-white ch-shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ch-outline-primary focus:ch-bg-primary ch-cursor-pointer">Follow</button>
         </form>
     @else
         @php
@@ -57,11 +58,11 @@
                 <div class='ch-flex ch-flex-col ch-h-full'>
                     <div class='ch-flex ch-flex-col ch-justify-between'>
                         <div class='ch-text-center'>
-                            <div class='ch-font-bold'>Create an account</div>
-                            <div class='ch-text-center'>Sign up for a new account in our community. It's easy!</div>
+                            <div class='ch-text-base ch-font-bold'>Create an account</div>
+                            <div class='ch-text-sm ch-text-center'>Sign up for a new account in our community. It's easy!</div>
                         </div>
                         <a href='{{ route('follow.index', ['action' => 'register']) }}'
-                            class="ch-no-underline hover:ch-no-underline ch-text-center ch-mt-4 ch-rounded-md ch-bg-primary hover:ch-bg-primary/90 ch-px-3.5 ch-py-2.5 ch-font-medium hover:ch-text-white !ch-text-white ch-shadow-sm focus:ch-outline-none focus:ch-text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ch-outline-primary">Register
+                            class="ch-text-sm ch-no-underline hover:ch-no-underline ch-text-center ch-mt-4 ch-rounded-md ch-bg-primary hover:ch-bg-primary/90 ch-px-3.5 ch-py-2.5 ch-font-medium hover:ch-text-white !ch-text-white ch-shadow-sm focus:ch-outline-none focus:ch-text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ch-outline-primary">Register
                             a new account</a>
                     </div>
                 </div>
@@ -70,11 +71,11 @@
                 <div class='ch-flex ch-flex-col ch-h-full'>
                     <div class='ch-flex ch-flex-col ch-justify-between'>
                         <div class='ch-text-center'>
-                            <div class='ch-font-bold'>Sign in</div>
-                            <div class='ch-text-center'>Already have an account? Sign in here.</div>
+                            <div class='ch-text-base ch-font-bold'>Sign in</div>
+                            <div class='ch-text-sm ch-text-center'>Already have an account? Sign in here.</div>
                         </div>
                         <a href='{{ route('follow.index', ['action' => 'login']) }}'
-                            class="ch-no-underline hover:ch-no-underline ch-text-center ch-mt-4 ch-rounded-md ch-bg-primary hover:ch-bg-primary/90 ch-px-3.5 ch-py-2.5 ch-font-medium hover:ch-text-white !ch-text-white ch-shadow-sm focus:ch-outline-none focus:ch-text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ch-outline-primary">Sign
+                            class="ch-text-sm ch-no-underline hover:ch-no-underline ch-text-center ch-mt-4 ch-rounded-md ch-bg-primary hover:ch-bg-primary/90 ch-px-3.5 ch-py-2.5 ch-font-medium hover:ch-text-white !ch-text-white ch-shadow-sm focus:ch-outline-none focus:ch-text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ch-outline-primary">Sign
                             in now</a>
                     </div>
                 </div>
@@ -82,11 +83,11 @@
             <div class='ch-flex ch-flex-col ch-h-full'>
                 <div class='ch-flex ch-flex-col ch-justify-between'>
                     <div class='ch-text-center'>
-                        <div class='ch-font-bold'>Follow anonymously</div>
-                        <div class='ch-text-center'>Follow content from this community anonymously.</div>
+                        <div class='ch-text-base ch-font-bold'>Follow anonymously</div>
+                        <div class='ch-text-sm ch-text-center'>Follow content from this community anonymously.</div>
                     </div>
                     <a href='{{ route('follow.index', ['action' => 'follow']) }}'
-                        class="ch-no-underline hover:ch-no-underline ch-text-center ch-mt-4 ch-rounded-md ch-bg-primary hover:ch-bg-primary/90 ch-px-3.5 ch-py-2.5 ch-font-medium hover:ch-text-white !ch-text-white ch-shadow-sm focus:ch-outline-none focus:ch-text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ch-outline-primary">Follow
+                        class="ch-text-sm ch-no-underline hover:ch-no-underline ch-text-center ch-mt-4 ch-rounded-md ch-bg-primary hover:ch-bg-primary/90 ch-px-3.5 ch-py-2.5 ch-font-medium hover:ch-text-white !ch-text-white ch-shadow-sm focus:ch-outline-none focus:ch-text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ch-outline-primary">Follow
                         now</a>
                 </div>
             </div>

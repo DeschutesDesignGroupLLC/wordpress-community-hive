@@ -8,6 +8,7 @@
     "node_modules",
     "php",
     "scripts",
+    "src/blocks",
     "src/public",
     "src/storage",
     "tools",

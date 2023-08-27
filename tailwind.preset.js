@@ -9,6 +9,12 @@ export default {
       colors: {
         primary: '#2A9C66',
         secondary: '#18203D'
+      },
+      fontSize: {
+        sm: 'var(--wp--preset--font-size--small, 0.875rem)',
+        base: 'var(--wp--preset--font-size--medium, 1rem)',
+        lg: 'var(--wp--preset--font-size--large, 1.125rem)',
+        xl: 'var(--wp--preset--font-size--x-large, 1.25rem)'
       }
     },
     fontFamily: {
