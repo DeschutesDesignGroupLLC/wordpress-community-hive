@@ -2,9 +2,7 @@
 
 SOURCE_DIR="src"
 VENDOR_DIR="vendor"
-BLOCK_DIR="block"
 PLUGIN_FILE="communityhive.php"
-BLOCK_FILE="block.json"
 ZIP_FILE="communityhive.zip"
 
 # Delete existing build
@@ -21,16 +19,8 @@ if [ ! -d "./build/$VENDOR_DIR" ]; then
   cp -r $VENDOR_DIR build/
 fi
 
-if [ ! -d "./build/$BLOCK_DIR" ]; then
-  cp -r $BLOCK_DIR build/
-fi
-
 if [ ! -f "./build/$PLUGIN_FILE" ]; then
   cp -r $PLUGIN_FILE build/
-fi
-
-if [ ! -f "./build/$BLOCK_FILE" ]; then
-  cp -r $BLOCK_FILE build/
 fi
 
 if [ ! -f "./build/composer.json" ]; then
@@ -54,9 +44,7 @@ zip -r $ZIP_FILE * -x '*.log' '*.env'
 # Clean up files
 rm -r $SOURCE_DIR
 rm -r $VENDOR_DIR
-rm -r $BLOCK_DIR
 rm -r $PLUGIN_FILE
-rm -r $BLOCK_FILE
 rm -r composer.json
 
 echo "Package complete."

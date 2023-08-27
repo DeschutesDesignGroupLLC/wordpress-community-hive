@@ -35,7 +35,7 @@ class CommunityHiveServiceProvider extends ServiceProvider
         add_shortcode('community_hive_follow', function () {
             bundle('shortcode')->enqueueCss();
 
-            return view('shortcodes.follow', [
+            return view('shortcode.follow', [
                 'loggedIn' => is_user_logged_in(),
                 'user' => wp_get_current_user(),
                 'community' => get_bloginfo('name'),
@@ -76,7 +76,13 @@ class CommunityHiveServiceProvider extends ServiceProvider
 
     public function registerBlocks(): void
     {
-        register_block_type(dirname(Config::get('COMMUNITY_HIVE_PLUGIN_FILE')));
+        register_block_type('community-hive/follow', [
+            'render_callback' => function () {
+                bundle('block')->enqueueCss();
+
+                return view('block.follow.index')->render();
+            },
+        ]);
     }
 
     public function activationRoutine(): void

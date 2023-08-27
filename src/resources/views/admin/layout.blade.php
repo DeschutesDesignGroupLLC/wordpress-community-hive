@@ -1,4 +1,4 @@
-<link href="{{ asset('app.css') }}" rel="stylesheet">
+<link href="{{ asset('admin.css') }}" rel="stylesheet">
 <div class='ch-font-montserrat ch-my-5 ch-mr-3 md:ch-mr-5'>
     <h1 class='ch-text-xl ch-font-bold ch-pb-4 ch-text-black'>{{ $title ?? 'Settings' }}</h1>
     <div class='ch-bg-white ch-p-4 ch-ring-1 ch-ring-black ch-ring-opacity-10 ch-shadow-md ch-rounded-md text-slate-600'>
@@ -11,4 +11,4 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('app.js') }}"></script>
+<script src="{{ asset('admin.js') }}"></script>
