@@ -31,7 +31,7 @@ fi
 cd build
 
 # Update the autoloader to PHP-Scoper
-# sed -i '' 's/\/autoload.php/\/scoper-autoload.php/g;' communityhive.php
+sed -i '' 's/\/autoload.php/\/scoper-autoload.php/g;' communityhive.php
 
 # Remove all files from the storage directories
 rm -rf src/storage/framework/cache/*

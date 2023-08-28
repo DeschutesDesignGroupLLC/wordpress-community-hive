@@ -31,12 +31,12 @@ return [
     ],
     'exclude-files' => [
         ...array_values(array_map(
-            static fn (SplFileInfo $fileInfo) => $fileInfo->getPathName(),
-            iterator_to_array(
-                Finder::create()
-                    ->files()
-                    ->in('vendor/illuminate/console/resources/views/components')
-            )
+	        static fn (SplFileInfo $fileInfo) => $fileInfo->getPathName(),
+	        iterator_to_array(
+		        Finder::create()
+		              ->files()
+		              ->in('vendor/illuminate/console/resources/views/components')
+	        ),
         ))
     ],
     'patchers' => [],
