@@ -22,7 +22,7 @@ jobs:
           php-version: 8.1
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite
           ini-values: error_reporting=E_ALL
-          tools: composer
+          tools: composer, phive
           coverage: none
 
       - name: Setup Node
@@ -55,13 +55,8 @@ jobs:
       - name: Build Blocks
         run: npm run build:blocks
 
-      - name: Install PHIVE
-        uses: szepeviktor/phive@v1
-        with:
-          binPath: ${{ github.workspace }}/tools/phive
-
       - name: Intall PHP-Scoper
-        run: ${{ github.workspace }}/tools/phive install humbug/php-scoper --force-accept-unsigned
+        run: phive --no-progress install humbug/php-scoper --force-accept-unsigned --trust-gpg-keys 74A754C9778AA03AA451D1C1A000F927D67184EE
 
       - name: Run PHP-Scoper
         run: composer prefix
