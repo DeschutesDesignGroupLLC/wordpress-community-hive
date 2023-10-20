@@ -4,6 +4,8 @@ namespace CommunityHive\App\Http\Middleware;
 
 use Closure;
 use CommunityHive\App\Contracts\CommunityHiveApiServiceContract;
+use CommunityHive\App\Http\Responses\ErrorResponse;
+use CommunityHive\App\Http\Responses\OkayResponse;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -17,16 +19,20 @@ class AuthenticateJwt
      */
     public function handle(Request $request, Closure $next): mixed
     {
+        if ($request->input('request_type') === 'test') {
+            return app()->make(OkayResponse::class);
+        }
+
         if (! $token = $request->getContent()) {
-            return response()->json([
-                'error' => 'There was no JWT included in the request.',
+            return app()->make(ErrorResponse::class, [
+                'message' => 'There was no JWT included in the request.',
             ]);
         }
 
         $apiService = app()->make(CommunityHiveApiServiceContract::class);
         if (! $payload = $apiService->decodeJwt($token)) {
-            return response()->json([
-                'error' => 'Unable to decode the provided JWT.',
+            return app()->make(ErrorResponse::class, [
+                'message' => 'Unable to decode the provided JWT.',
             ]);
         }
 
